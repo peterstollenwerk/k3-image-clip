@@ -137,6 +137,8 @@ export default {
           ratio: 'fixed'
         }
       }
+      this.was_moved = true;
+      
       this.cropprFacade.setRatio({ 
         clip: this.clip
       })
