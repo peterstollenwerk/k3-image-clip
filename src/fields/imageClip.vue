@@ -67,7 +67,7 @@ export default {
     },
     ratios: {
       type: Array,
-      default: [{value: 'free', text: 'Free'}]
+      default: null
     }
   },
   data () {
