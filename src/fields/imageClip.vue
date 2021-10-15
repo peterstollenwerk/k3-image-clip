@@ -51,6 +51,7 @@
         size="large"
         :image="clip_image"
         :clip="clip"
+        :ratios="ratios"
         @submit="clippedArea"
     />
   </k-field>
@@ -63,6 +64,10 @@ export default {
     clip: {
       type: Object,
       default: null
+    },
+    ratios: {
+      type: Array,
+      default: [{value: 'free', text: 'Free'}]
     }
   },
   data () {

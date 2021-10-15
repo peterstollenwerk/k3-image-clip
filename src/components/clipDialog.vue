@@ -44,26 +44,20 @@
       <footer class="k-dialog-footer">
         <slot name="footer">
             <div class="ratio" style="margin-left: 1rem; margin-right: 1rem;">
-            <k-select-field
-                  v-model="ratio"
-                  :options="[
-                    { value: 'free', text: 'Free' },
-                    { value: '1/1', text: '1/1' },
-                    { value: '2/1', text: '2/1' }
-                  ]"
-                  :required="false"
-                  label="Ratio"
-                  name="ratio"
-                  help=""
-                  @input="setRatio"
+              <k-select-field
+                v-model="ratio"
+                :options="ratios"
+                :required="false"
+                label="Ratio"
+                name="ratio"
+                help=""
+                @input="setRatio"
               />
             </div>
           <k-button-group>
             <k-button icon="cancel" class="k-dialog-button-cancel" @click="cancel">
               {{ $t('cancel') }}
             </k-button>
-            
-  
             <k-button
                 :icon="icon"
                 :theme="theme"
@@ -95,6 +89,10 @@ export default {
     clip: {
       type: Object,
       default: null
+    },
+    ratios: {
+      type: Array,
+      default: [{value: 'free', text: 'Free'}]
     }
   },
   data () {
@@ -126,8 +124,8 @@ export default {
 
       if(this.ratio=='free') {
         this.clip = {
-          minwidth: null,
-          minheight: null,
+          minwidth: 1,
+          minheight: 3,
           ratio: null
         }  
       } else {

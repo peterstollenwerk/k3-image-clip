@@ -1,1 +1,1657 @@
-var __defProp=Object.defineProperty,__getOwnPropSymbols=Object.getOwnPropertySymbols,__hasOwnProp=Object.prototype.hasOwnProperty,__propIsEnum=Object.prototype.propertyIsEnumerable,__defNormalProp=(t,i,e)=>i in t?__defProp(t,i,{enumerable:!0,configurable:!0,writable:!0,value:e}):t[i]=e,__spreadValues=(t,i)=>{for(var e in i||(i={}))__hasOwnProp.call(i,e)&&__defNormalProp(t,e,i[e]);if(__getOwnPropSymbols)for(var e of __getOwnPropSymbols(i))__propIsEnum.call(i,e)&&__defNormalProp(t,e,i[e]);return t};!function(){"use strict";function t(t,i,e,n,o,s,r,a){var h,l="function"==typeof t?t.options:t;if(i&&(l.render=i,l.staticRenderFns=e,l._compiled=!0),n&&(l.functional=!0),s&&(l._scopeId="data-v-"+s),r?(h=function(t){(t=t||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(t=__VUE_SSR_CONTEXT__),o&&o.call(this,t),t&&t._registeredComponents&&t._registeredComponents.add(r)},l._ssrRegister=h):o&&(h=a?function(){o.call(this,(l.functional?this.parent:this).$root.$options.shadowRoot)}:o),h)if(l.functional){l._injectStyles=h;var c=l.render;l.render=function(t,i){return h.call(i),c(t,i)}}else{var d=l.beforeCreate;l.beforeCreate=d?[].concat(d,h):[h]}return{exports:t,options:l}}const i={};var e=t({extends:"k-files-field",props:{clip:{type:Object,default:null}},data:()=>({clip_image:{}}),methods:{openClipDialog(t){this.clip_image=this.value.find((i=>i.id===t)),this.$refs.clip.open()},clippedArea(t){this.clip_image.clip=t.clip,this.onInput(),this.getPreview(t.id,t.clip)},getPreview(t,i){this.$api.post(this.endpoints.field+"/preview",{id:t,width:i.width,height:i.height,top:i.top,left:i.left}).then((i=>{if(!i.image)throw new Error("image clip: no image for preview received.");{let e=this.name,n=this.$store.state.content.current,o=this.$store.getters["content/values"](n)[e];if(o){o.find((i=>i.id===t)).image=i.image,this.$store.dispatch("content/update",[e,o,n])}else{this.selected.find((i=>i.id===t)).image=i.image}}})).catch((t=>{console.log(t)}))}}},(function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("k-field",t._b({staticClass:"k-files-field",scopedSlots:t._u([t.more&&!t.disabled?{key:"options",fn:function(){return[e("k-button-group",{staticClass:"k-field-options"},[e("k-options-dropdown",t._b({ref:"options",on:{action:t.onAction}},"k-options-dropdown",t.options,!1))],1)]},proxy:!0}:null],null,!0)},"k-field",t.$props,!1),[e("k-dropzone",{attrs:{disabled:!1===t.more},on:{drop:t.drop}},[t.selected.length?[e("k-clip-items",{attrs:{items:t.selected,layout:t.layout,size:t.size,sortable:!t.disabled&&t.selected.length>1},on:{sort:t.onInput,sortChange:function(i){return t.$emit("change",i)},openClipDialog:t.openClipDialog},scopedSlots:t._u([{key:"options",fn:function(i){var n=i.index;return[t.disabled?t._e():e("k-button",{attrs:{tooltip:t.$t("remove"),icon:"remove"},on:{click:function(i){return t.remove(n)}}})]}}],null,!1,1805525116)})]:e("k-empty",{attrs:{layout:t.layout,"data-invalid":t.isInvalid,icon:"image"},on:{click:t.prompt}},[t._v(" "+t._s(t.empty||t.$t("field.files.empty"))+" ")])],2),e("k-files-dialog",{ref:"selector",on:{submit:t.select}}),e("k-upload",{ref:"fileUpload",on:{success:t.upload}}),e("k-clip-dialog",{ref:"clip",attrs:{size:"large",image:t.clip_image,clip:t.clip},on:{submit:t.clippedArea}})],1)}),[],!1,n,null,null,null);function n(t){for(let e in i)this[e]=i[e]}var o=function(){return e.exports}();const s={};var r=t({extends:"k-items",computed:{}},(function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("k-draggable",{staticClass:"k-items",class:"k-"+t.layout+"-items",attrs:{handle:!0,options:t.dragOptions,"data-layout":t.layout,"data-size":t.size,list:t.items},on:{change:function(i){return t.$emit("change",i)},end:function(i){return t.$emit("sort",t.items,i)}}},[t._t("default",(function(){return t._l(t.items,(function(i,n){return e("k-clip-item",t._b({key:i.id||n,class:{"k-draggable-item":t.sortable&&i.sortable},attrs:{image:t.imageOptions(i),layout:t.layout,sortable:t.sortable&&i.sortable,width:i.column},on:{click:function(e){return t.$emit("item",i,n)},drag:function(e){return t.onDragStart(e,i.dragText)},flag:function(e){return t.$emit("flag",i,n)},option:function(e){return t.$emit("option",e,i,n)},openClipDialog:function(i){return t.$emit("openClipDialog",i)}},nativeOn:{mouseover:function(e){return t.$emit("hover",e,i,n)}},scopedSlots:t._u([{key:"options",fn:function(){return[t._t("options",null,{item:i,index:n})]},proxy:!0}],null,!0)},"k-clip-item",i,!1))}))}))],2)}),[],!1,a,"2b4eb7a8",null,null);function a(t){for(let i in s)this[i]=s[i]}var h=function(){return r.exports}(),l=function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("article",t._b({staticClass:"k-item",class:!!t.layout&&"k-"+t.layout+"-item",attrs:{"data-has-figure":t.hasFigure,"data-has-info":Boolean(t.info),"data-has-label":Boolean(t.label),"data-has-options":Boolean(t.options),tabindex:"-1"},on:{click:function(i){return t.$emit("click",i)},dragstart:function(i){return t.$emit("drag",i)}}},"article",t.data,!1),[t.hasFigure?e("k-clip-item-image",{attrs:{image:t.image,layout:t.layout,width:t.width,id:t.id,resizable:t.resizable,disabled:t.disabled},on:{clicked:function(i){return t.$emit("openClipDialog",t.id)}}}):t._e(),t.sortable?e("k-sort-handle",{staticClass:"k-item-sort-handle"}):t._e(),e("header",{staticClass:"k-item-content"},[e("h3",{staticClass:"k-item-title"},[t.link?e("k-link",{staticClass:"k-item-title-link",attrs:{target:t.target,to:t.link}},[e("span",{domProps:{innerHTML:t._s(t.title)}})]):e("span",{domProps:{innerHTML:t._s(t.title)}})],1),t.info?e("p",{staticClass:"k-item-info",domProps:{innerHTML:t._s(t.info)}}):t._e()]),t.flag||t.options||t.$slots.options?e("footer",{staticClass:"k-item-footer"},[e("nav",{staticClass:"k-item-buttons",on:{click:function(t){t.stopPropagation()}}},[t.flag?e("k-status-icon",t._b({},"k-status-icon",t.flag,!1)):t._e(),t._t("options",(function(){return[t.options?e("k-options-dropdown",{staticClass:"k-item-options-dropdown",attrs:{options:t.options},on:{option:t.onOption}}):t._e()]}))],2)]):t._e()],1)};const c={extends:"k-item",props:{id:String,resizable:Boolean,disabled:Boolean},computed:{hasFigure(){return!1!==this.image&&Object.keys(this.image).length>0},title(){return this.text||"-"}}},d={};var u=t(c,l,[],!1,p,null,null,null);function p(t){for(let i in d)this[i]=d[i]}var m=function(){return u.exports}();const g={extends:"k-item-image",props:{id:String,resizable:Boolean,disabled:Boolean}},v={};var f=t(g,(function(){var t=this,i=t.$createElement,e=t._self._c||i;return t.image?e("div",{staticClass:"k-item-figure relative",style:{background:t.$helper.color(t.back)}},[t.resizable&&!t.disabled?e("k-clip-handle",{attrs:{layout:t.layout},on:{clicked:function(i){return t.$emit("clicked")}}}):t._e(),t.image.src?e("k-image",{staticClass:"k-item-image",attrs:{cover:t.image.cover,ratio:t.ratio,sizes:t.sizes,src:t.image.src,srcset:t.image.srcset}}):e("k-aspect-ratio",{attrs:{ratio:t.ratio}},[e("k-icon",{staticClass:"k-item-icon",attrs:{color:t.$helper.color(t.image.color),size:t.size,type:t.image.icon}})],1)],1):t._e()}),[],!1,w,"23543f3d",null,null);function w(t){for(let i in v)this[i]=v[i]}var _=function(){return f.exports}();const b={};var y=t({extends:"k-sort-handle",props:{layout:String},methods:{open(){this.$emit("clicked")}}},(function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("span",{class:"k-sort-handle k-item-sort-handle k-icon k-icon-sort clip-handle "+t.layout+"-handle",attrs:{"aria-hidden":"true"}},[e("img",{staticClass:"clipicon",attrs:{src:"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAMFBMVEUAAAAzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzPzX0yTAAAAD3RSTlMAQIDAEPDQYLAgoFBwMJALzXfXAAAAsElEQVRYw+3TPQoCMRCG4RgXVEQwrVXwFhbilt7AQu+QvYl7BQ9h72XshUUtP+NPQImBDAq7Webtn2I+GMFxXG1JVAzaDjJlm+CivMrvoINQOhnwSPpHG2jarAsGDH4BOREs1zQwMpiRwB44HwhAwlaV0SDb4t5GiOEqCvTxbG5lEQO6eHUErtHAVVDBKU3Qm76lG/MPH2CnbHkIhBonAwbKy7ijY3OzMmg74Djuj90AekzAtvxv03QAAAAASUVORK5CYII=",alt:"Clip"},on:{click:t.open}})])}),[],!1,x,"71eb2243",null,null);function x(t){for(let i in b)this[i]=b[i]}var E=function(){return y.exports}(),z=("undefined"!=typeof globalThis?globalThis:"undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self&&self,{exports:{}});z.exports=function(){(function(){for(var t=0,i=["ms","moz","webkit","o"],e=0;e<i.length&&!window.requestAnimationFrame;++e)window.requestAnimationFrame=window[i[e]+"RequestAnimationFrame"],window.cancelAnimationFrame=window[i[e]+"CancelAnimationFrame"]||window[i[e]+"CancelRequestAnimationFrame"];window.requestAnimationFrame||(window.requestAnimationFrame=function(i,e){var n=(new Date).getTime(),o=Math.max(0,16-(n-t)),s=window.setTimeout((function(){i(n+o)}),o);return t=n+o,s}),window.cancelAnimationFrame||(window.cancelAnimationFrame=function(t){clearTimeout(t)})})(),function(){if("function"==typeof window.CustomEvent)return!1;function t(t,i){i=i||{bubbles:!1,cancelable:!1,detail:void 0};var e=document.createEvent("CustomEvent");return e.initCustomEvent(t,i.bubbles,i.cancelable,i.detail),e}t.prototype=window.Event.prototype,window.CustomEvent=t}(),function(t){try{return new CustomEvent("test"),!1}catch(e){}function i(i,e){e=e||{bubbles:!1,cancelable:!1};var n=document.createEvent("MouseEvent");return n.initMouseEvent(i,e.bubbles,e.cancelable,t,0,0,0,0,0,!1,!1,!1,!1,0,null),n}i.prototype=Event.prototype,t.MouseEvent=i}(window);var t=function(t,i){if(!(t instanceof i))throw new TypeError("Cannot call a class as a function")},i=function(){function t(t,i){for(var e=0;e<i.length;e++){var n=i[e];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(t,n.key,n)}}return function(i,e,n){return e&&t(i.prototype,e),n&&t(i,n),i}}(),e=function t(i,e,n){null===i&&(i=Function.prototype);var o=Object.getOwnPropertyDescriptor(i,e);if(void 0===o){var s=Object.getPrototypeOf(i);return null===s?void 0:t(s,e,n)}if("value"in o)return o.value;var r=o.get;return void 0!==r?r.call(n):void 0},n=function(t,i){if("function"!=typeof i&&null!==i)throw new TypeError("Super expression must either be null or a function, not "+typeof i);t.prototype=Object.create(i&&i.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),i&&(Object.setPrototypeOf?Object.setPrototypeOf(t,i):t.__proto__=i)},o=function(t,i){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!i||"object"!=typeof i&&"function"!=typeof i?t:i},s=function(){function t(t,i){var e=[],n=!0,o=!1,s=void 0;try{for(var r,a=t[Symbol.iterator]();!(n=(r=a.next()).done)&&(e.push(r.value),!i||e.length!==i);n=!0);}catch(h){o=!0,s=h}finally{try{!n&&a.return&&a.return()}finally{if(o)throw s}}return e}return function(i,e){if(Array.isArray(i))return i;if(Symbol.iterator in Object(i))return t(i,e);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),r=function i(e,n,o,s){t(this,i);var r=this;function a(t){t.stopPropagation(),document.addEventListener("mouseup",h),document.addEventListener("mousemove",l),r.eventBus.dispatchEvent(new CustomEvent("handlestart",{detail:{handle:r}}))}function h(t){t.stopPropagation(),document.removeEventListener("mouseup",h),document.removeEventListener("mousemove",l),r.eventBus.dispatchEvent(new CustomEvent("handleend",{detail:{handle:r}}))}function l(t){t.stopPropagation(),r.eventBus.dispatchEvent(new CustomEvent("handlemove",{detail:{mouseX:t.clientX,mouseY:t.clientY}}))}this.position=e,this.constraints=n,this.cursor=o,this.eventBus=s,this.el=document.createElement("div"),this.el.className="croppr-handle",this.el.style.cursor=o,this.el.addEventListener("mousedown",a)},a=function(){function e(i,n,o,s){t(this,e),this.x1=i,this.y1=n,this.x2=o,this.y2=s}return i(e,[{key:"set",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null,n=arguments.length>3&&void 0!==arguments[3]?arguments[3]:null;return this.x1=null==t?this.x1:t,this.y1=null==i?this.y1:i,this.x2=null==e?this.x2:e,this.y2=null==n?this.y2:n,this}},{key:"width",value:function(){return Math.abs(this.x2-this.x1)}},{key:"height",value:function(){return Math.abs(this.y2-this.y1)}},{key:"resize",value:function(t,i){var e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[0,0],n=this.x1+this.width()*e[0],o=this.y1+this.height()*e[1];return this.x1=n-t*e[0],this.y1=o-i*e[1],this.x2=this.x1+t,this.y2=this.y1+i,this}},{key:"scale",value:function(t){var i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[0,0],e=this.width()*t,n=this.height()*t;return this.resize(e,n,i),this}},{key:"move",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,e=this.width(),n=this.height();return t=null===t?this.x1:t,i=null===i?this.y1:i,this.x1=t,this.y1=i,this.x2=t+e,this.y2=i+n,this}},{key:"getRelativePoint",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[0,0];return[this.width()*t[0],this.height()*t[1]]}},{key:"getAbsolutePoint",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:[0,0];return[this.x1+this.width()*t[0],this.y1+this.height()*t[1]]}},{key:"constrainToRatio",value:function(t){var i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[0,0],e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:"height";if(null!==t)return this.width(),this.height(),"width"===e?this.resize(1*this.height()/t,this.height(),i):this.resize(this.width(),this.width()*t,i),this}},{key:"constrainToBoundary",value:function(t,i){var e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[0,0],n=this.getAbsolutePoint(e),o=s(n,2),r=o[0],a=o[1],h=r,l=a,c=t-r,d=i-a,u=-2*e[0]+1,p=-2*e[1]+1,m=null,g=null;switch(u){case-1:m=h;break;case 0:m=2*Math.min(h,c);break;case 1:m=c}switch(p){case-1:g=l;break;case 0:g=2*Math.min(l,d);break;case 1:g=d}if(this.width()>m){var v=m/this.width();this.scale(v,e)}if(this.height()>g){var f=g/this.height();this.scale(f,e)}return this}},{key:"constrainToSize",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null,i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:null,n=arguments.length>3&&void 0!==arguments[3]?arguments[3]:null,o=arguments.length>4&&void 0!==arguments[4]?arguments[4]:[0,0],s=arguments.length>5&&void 0!==arguments[5]?arguments[5]:null;if(s&&(s>1?(t=1*i/s,n=e*s):s<1&&(i=t*s,e=1*n/s)),t&&this.width()>t){var r=t,a=null===s?this.height():i;this.resize(r,a,o)}if(i&&this.height()>i){var h=null===s?this.width():t,l=i;this.resize(h,l,o)}if(e&&this.width()<e){var c=e,d=null===s?this.height():n;this.resize(c,d,o)}if(n&&this.height()<n){var u=null===s?this.width():e,p=n;this.resize(u,p,o)}return this}}]),e}();function h(t){t.addEventListener("touchstart",l),t.addEventListener("touchend",l),t.addEventListener("touchmove",l)}function l(t){t.preventDefault();var i=t.changedTouches[0],e={touchstart:"mousedown",touchmove:"mousemove",touchend:"mouseup"};i.target.dispatchEvent(new MouseEvent(e[t.type],{bubbles:!0,cancelable:!0,view:window,clientX:i.clientX,clientY:i.clientY,screenX:i.screenX,screenY:i.screenY}))}var c=[{position:[0,0],constraints:[1,0,0,1],cursor:"nw-resize"},{position:[.5,0],constraints:[1,0,0,0],cursor:"n-resize"},{position:[1,0],constraints:[1,1,0,0],cursor:"ne-resize"},{position:[1,.5],constraints:[0,1,0,0],cursor:"e-resize"},{position:[1,1],constraints:[0,1,1,0],cursor:"se-resize"},{position:[.5,1],constraints:[0,0,1,0],cursor:"s-resize"},{position:[0,1],constraints:[0,0,1,1],cursor:"sw-resize"},{position:[0,.5],constraints:[0,0,0,1],cursor:"w-resize"}],d=function(){function e(i,n){var o=this,s=arguments.length>2&&void 0!==arguments[2]&&arguments[2];if(t(this,e),this.options=e.parseOptions(n||{}),!i.nodeName&&null==(i=document.querySelector(i)))throw"Unable to find element.";if(!i.getAttribute("src"))throw"Image src not provided.";this._initialized=!1,this._restore={parent:i.parentNode,element:i},s||(0===i.width||0===i.height?i.onload=function(){o.initialize(i)}:this.initialize(i))}return i(e,[{key:"initialize",value:function(t){this.createDOM(t),this.options.convertToPixels(this.cropperEl),this.attachHandlerEvents(),this.attachRegionEvents(),this.attachOverlayEvents(),this.box=this.initializeBox(this.options),this.redraw(),this._initialized=!0,null!==this.options.onInitialize&&this.options.onInitialize(this)}},{key:"createDOM",value:function(t){this.containerEl=document.createElement("div"),this.containerEl.className="croppr-container",this.eventBus=this.containerEl,h(this.containerEl),this.cropperEl=document.createElement("div"),this.cropperEl.className="croppr",this.imageEl=document.createElement("img"),this.imageEl.setAttribute("src",t.getAttribute("src")),this.imageEl.setAttribute("alt",t.getAttribute("alt")),this.imageEl.className="croppr-image",this.imageClippedEl=this.imageEl.cloneNode(),this.imageClippedEl.className="croppr-imageClipped",this.regionEl=document.createElement("div"),this.regionEl.className="croppr-region",this.overlayEl=document.createElement("div"),this.overlayEl.className="croppr-overlay";var i=document.createElement("div");i.className="croppr-handleContainer",this.handles=[];for(var e=0;e<c.length;e++){var n=new r(c[e].position,c[e].constraints,c[e].cursor,this.eventBus);this.handles.push(n),i.appendChild(n.el)}this.cropperEl.appendChild(this.imageEl),this.cropperEl.appendChild(this.imageClippedEl),this.cropperEl.appendChild(this.regionEl),this.cropperEl.appendChild(this.overlayEl),this.cropperEl.appendChild(i),this.containerEl.appendChild(this.cropperEl),t.parentElement.replaceChild(this.containerEl,t)}},{key:"setImage",value:function(t){var i=this;return this.imageEl.onload=function(){i.box=i.initializeBox(i.options),i.redraw()},this.imageEl.src=t,this.imageClippedEl.src=t,this}},{key:"destroy",value:function(){this._restore.parent.replaceChild(this._restore.element,this.containerEl)}},{key:"initializeBox",value:function(t){var i=t.startSize.width,e=t.startSize.height,n=new a(0,0,i,e);n.constrainToRatio(t.aspectRatio,[.5,.5]);var o=t.minSize,s=t.maxSize;n.constrainToSize(s.width,s.height,o.width,o.height,[.5,.5],t.aspectRatio);var r=this.cropperEl.offsetWidth,h=this.cropperEl.offsetHeight;n.constrainToBoundary(r,h,[.5,.5]);var l=this.cropperEl.offsetWidth/2-n.width()/2,c=this.cropperEl.offsetHeight/2-n.height()/2;return n.move(l,c),n}},{key:"redraw",value:function(){var t=this,i=Math.round(this.box.width()),e=Math.round(this.box.height()),n=Math.round(this.box.x1),o=Math.round(this.box.y1),s=Math.round(this.box.x2),r=Math.round(this.box.y2);window.requestAnimationFrame((function(){t.regionEl.style.transform="translate("+n+"px, "+o+"px)",t.regionEl.style.width=i+"px",t.regionEl.style.height=e+"px",t.imageClippedEl.style.clip="rect("+o+"px, "+s+"px, "+r+"px, "+n+"px)";for(var a=t.box.getAbsolutePoint([.5,.5]),h=a[0]-t.cropperEl.offsetWidth/2>>31,l=a[1]-t.cropperEl.offsetHeight/2>>31,c=-2*((h^l)+l+l+4)+8,d=0;d<t.handles.length;d++){var u=t.handles[d],p=u.el.offsetWidth,m=u.el.offsetHeight,g=n+i*u.position[0]-p/2,v=o+e*u.position[1]-m/2;u.el.style.transform="translate("+Math.round(g)+"px, "+Math.round(v)+"px)",u.el.style.zIndex=c==d?5:4}}))}},{key:"attachHandlerEvents",value:function(){var t=this.eventBus;t.addEventListener("handlestart",this.onHandleMoveStart.bind(this)),t.addEventListener("handlemove",this.onHandleMoveMoving.bind(this)),t.addEventListener("handleend",this.onHandleMoveEnd.bind(this))}},{key:"attachRegionEvents",value:function(){var t=this.eventBus;function i(i){i.stopPropagation(),document.addEventListener("mouseup",n),document.addEventListener("mousemove",e),t.dispatchEvent(new CustomEvent("regionstart",{detail:{mouseX:i.clientX,mouseY:i.clientY}}))}function e(i){i.stopPropagation(),t.dispatchEvent(new CustomEvent("regionmove",{detail:{mouseX:i.clientX,mouseY:i.clientY}}))}function n(i){i.stopPropagation(),document.removeEventListener("mouseup",n),document.removeEventListener("mousemove",e),t.dispatchEvent(new CustomEvent("regionend",{detail:{mouseX:i.clientX,mouseY:i.clientY}}))}this.regionEl.addEventListener("mousedown",i),t.addEventListener("regionstart",this.onRegionMoveStart.bind(this)),t.addEventListener("regionmove",this.onRegionMoveMoving.bind(this)),t.addEventListener("regionend",this.onRegionMoveEnd.bind(this))}},{key:"attachOverlayEvents",value:function(){var t=4,i=this,e=null;function n(n){n.stopPropagation(),document.addEventListener("mouseup",s),document.addEventListener("mousemove",o);var r=i.cropperEl.getBoundingClientRect(),h=n.clientX-r.left,l=n.clientY-r.top;e=i.box,i.box=new a(h,l,h+1,l+1),i.eventBus.dispatchEvent(new CustomEvent("handlestart",{detail:{handle:i.handles[t]}}))}function o(t){t.stopPropagation(),i.eventBus.dispatchEvent(new CustomEvent("handlemove",{detail:{mouseX:t.clientX,mouseY:t.clientY}}))}function s(t){t.stopPropagation(),document.removeEventListener("mouseup",s),document.removeEventListener("mousemove",o),1!==i.box.width()||1!==i.box.height()?i.eventBus.dispatchEvent(new CustomEvent("handleend",{detail:{mouseX:t.clientX,mouseY:t.clientY}})):i.box=e}this.overlayEl.addEventListener("mousedown",n)}},{key:"onHandleMoveStart",value:function(t){var i=t.detail.handle,e=[1-i.position[0],1-i.position[1]],n=this.box.getAbsolutePoint(e),o=s(n,2),r=o[0],a=o[1];this.activeHandle={handle:i,originPoint:e,originX:r,originY:a},null!==this.options.onCropStart&&this.options.onCropStart(this.getValue())}},{key:"onHandleMoveMoving",value:function(t){var i=t.detail,e=i.mouseX,n=i.mouseY,o=this.cropperEl.getBoundingClientRect();e-=o.left,n-=o.top,e<0?e=0:e>o.width&&(e=o.width),n<0?n=0:n>o.height&&(n=o.height);var s=this.activeHandle.originPoint.slice(),r=this.activeHandle.originX,h=this.activeHandle.originY,l=this.activeHandle.handle,c=1===l.constraints[0],d=1===l.constraints[1],u=1===l.constraints[2],p=1===l.constraints[3],m=(p||d)&&(c||u),g=p||d?r:this.box.x1,v=p||d?r:this.box.x2,f=c||u?h:this.box.y1,w=c||u?h:this.box.y2;g=p?e:g,v=d?e:v,f=c?n:f,w=u?n:w;var _=!1,b=!1;if((p||d)&&(_=p?e>r:e<r),(c||u)&&(b=c?n>h:n<h),_){var y=g;g=v,v=y,s[0]=1-s[0]}if(b){var x=f;f=w,w=x,s[1]=1-s[1]}var E=new a(g,f,v,w);if(this.options.aspectRatio){var z=this.options.aspectRatio,k=!1;m?k=n>E.y1+z*E.width()||n<E.y2-z*E.width():(c||u)&&(k=!0);var C=k?"width":"height";E.constrainToRatio(z,s,C)}var M=this.cropperEl.offsetWidth,S=this.cropperEl.offsetHeight;E.constrainToBoundary(M,S,s);var A=this.options.minSize,P=this.options.maxSize;E.constrainToSize(P.width,P.height,A.width,A.height,s,this.options.aspectRatio),E.x1<0||E.y1<0||E.x2>Math.ceil(o.width)||E.y2>Math.ceil(o.height)||(this.box=E,this.redraw(),null!==this.options.onCropMove&&this.options.onCropMove(this.getValue()))}},{key:"onHandleMoveEnd",value:function(t){null!==this.options.onCropEnd&&this.options.onCropEnd(this.getValue())}},{key:"onRegionMoveStart",value:function(t){var i=t.detail,e=i.mouseX,n=i.mouseY,o=this.cropperEl.getBoundingClientRect();e-=o.left,n-=o.top,this.currentMove={offsetX:e-this.box.x1,offsetY:n-this.box.y1},null!==this.options.onCropStart&&this.options.onCropStart(this.getValue())}},{key:"onRegionMoveMoving",value:function(t){var i=t.detail,e=i.mouseX,n=i.mouseY,o=this.currentMove,s=o.offsetX,r=o.offsetY,a=this.cropperEl.getBoundingClientRect();e-=a.left,n-=a.top,this.box.move(e-s,n-r),this.box.x1<0&&this.box.move(0,null),this.box.x2>a.width&&this.box.move(a.width-this.box.width(),null),this.box.y1<0&&this.box.move(null,0),this.box.y2>a.height&&this.box.move(null,a.height-this.box.height()),this.redraw(),null!==this.options.onCropMove&&this.options.onCropMove(this.getValue())}},{key:"onRegionMoveEnd",value:function(t){null!==this.options.onCropEnd&&this.options.onCropEnd(this.getValue())}},{key:"getValue",value:function(){var t=arguments.length>0&&void 0!==arguments[0]?arguments[0]:null;if(null===t&&(t=this.options.returnMode),"real"==t){var i=this.imageEl.naturalWidth,e=this.imageEl.naturalHeight,n=this.imageEl.getBoundingClientRect(),o=i/n.width,s=e/n.height;return{x:Math.round(this.box.x1*o),y:Math.round(this.box.y1*s),width:Math.round(this.box.width()*o),height:Math.round(this.box.height()*s)}}if("ratio"==t){var r=this.imageEl.getBoundingClientRect(),a=r.width,h=r.height;return{x:u(this.box.x1/a,3),y:u(this.box.y1/h,3),width:u(this.box.width()/a,3),height:u(this.box.height()/h,3)}}if("raw"==t)return{x:Math.round(this.box.x1),y:Math.round(this.box.y1),width:Math.round(this.box.width()),height:Math.round(this.box.height())}}}],[{key:"parseOptions",value:function(t){var i={aspectRatio:null,maxSize:{width:null,height:null},minSize:{width:null,height:null},startSize:{width:100,height:100,unit:"%"},returnMode:"real",onInitialize:null,onCropStart:null,onCropMove:null,onCropEnd:null},e=null;void 0!==t.aspectRatio&&("number"==typeof t.aspectRatio?e=t.aspectRatio:t.aspectRatio instanceof Array&&(e=t.aspectRatio[1]/t.aspectRatio[0]));var n=null;void 0!==t.maxSize&&null!==t.maxSize&&(n={width:t.maxSize[0]||null,height:t.maxSize[1]||null,unit:t.maxSize[2]||"px"});var o=null;void 0!==t.minSize&&null!==t.minSize&&(o={width:t.minSize[0]||null,height:t.minSize[1]||null,unit:t.minSize[2]||"px"});var s=null;void 0!==t.startSize&&null!==t.startSize&&(s={width:t.startSize[0]||null,height:t.startSize[1]||null,unit:t.startSize[2]||"%"});var r=null;"function"==typeof t.onInitialize&&(r=t.onInitialize);var a=null;"function"==typeof t.onCropStart&&(a=t.onCropStart);var h=null;"function"==typeof t.onCropEnd&&(h=t.onCropEnd);var l=null;"function"==typeof t.onUpdate&&(console.warn("Croppr.js: `onUpdate` is deprecated and will be removed in the next major release. Please use `onCropMove` or `onCropEnd` instead."),l=t.onUpdate),"function"==typeof t.onCropMove&&(l=t.onCropMove);var c=null;if(void 0!==t.returnMode){var d=t.returnMode.toLowerCase();if(-1===["real","ratio","raw"].indexOf(d))throw"Invalid return mode.";c=d}var u=function(t){for(var i=t.offsetWidth,e=t.offsetHeight,n=["maxSize","minSize","startSize"],o=0;o<n.length;o++){var s=n[o];null!==this[s]&&("%"==this[s].unit&&(null!==this[s].width&&(this[s].width=this[s].width/100*i),null!==this[s].height&&(this[s].height=this[s].height/100*e)),delete this[s].unit)}},p=function(t,i){return null!==t?t:i};return{aspectRatio:p(e,i.aspectRatio),maxSize:p(n,i.maxSize),minSize:p(o,i.minSize),startSize:p(s,i.startSize),returnMode:p(c,i.returnMode),onInitialize:p(r,i.onInitialize),onCropStart:p(a,i.onCropStart),onCropMove:p(l,i.onCropMove),onCropEnd:p(h,i.onCropEnd),convertToPixels:u}}}]),e}();function u(t,i){return Number(Math.round(t+"e"+i)+"e-"+i)}var p=function(s){function r(i,e){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return t(this,r),o(this,(r.__proto__||Object.getPrototypeOf(r)).call(this,i,e,n))}return n(r,s),i(r,[{key:"getValue",value:function(t){return e(r.prototype.__proto__||Object.getPrototypeOf(r.prototype),"getValue",this).call(this,t)}},{key:"setImage",value:function(t){return e(r.prototype.__proto__||Object.getPrototypeOf(r.prototype),"setImage",this).call(this,t)}},{key:"destroy",value:function(){return e(r.prototype.__proto__||Object.getPrototypeOf(r.prototype),"destroy",this).call(this)}},{key:"moveTo",value:function(t,i){return this.box.move(t,i),this.redraw(),null!==this.options.onCropEnd&&this.options.onCropEnd(this.getValue()),this}},{key:"resizeTo",value:function(t,i){var e=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[.5,.5];return this.box.resize(t,i,e),this.redraw(),null!==this.options.onCropEnd&&this.options.onCropEnd(this.getValue()),this}},{key:"scaleBy",value:function(t){var i=arguments.length>1&&void 0!==arguments[1]?arguments[1]:[.5,.5];return this.box.scale(t,i),this.redraw(),null!==this.options.onCropEnd&&this.options.onCropEnd(this.getValue()),this}},{key:"reset",value:function(){return this.box=this.initializeBox(this.options),this.redraw(),null!==this.options.onCropEnd&&this.options.onCropEnd(this.getValue()),this}}]),r}(d);return p}();var k=z.exports;function C({srcWidth:t,srcHeight:i,maxWidth:e,maxHeight:n}){let o=Math.min(e/t,n/i);return{width:t*o,height:i*o}}class M{constructor({el:t,original_dimensions:i,saved:e,clip:n,events:o}){this.el=t,this.original_dimensions=i,this.saved=e,this.min_width=n?n.minwidth:null,this.min_height=n?n.minheight:null,this.max_width=n?n.maxwidth:null,this.max_height=n?n.maxheight:null,this.limit_width=null,this.limit_height=null,this.ratio=n?n.ratio:null,this.events=o,this.validate(),this.cropInstance=this.init()}reset({position:t,clip:i}){this.cropInstance.destroy(),this.saved=t,this.cropInstance=this.init()}setRatio({clip:t}){this.cropInstance.destroy(),this.min_width=t?t.minwidth:null,this.min_height=t?t.minheight:null,this.ratio=t?t.ratio:null,this.saved=!1,this.cropInstance=this.init()}init(){let t=__spreadValues({returnMode:"raw",onInitialize:t=>{document.getElementsByClassName("croppr-image")[0].addEventListener("load",(t=>{this.image=t.target,this.factor_w=this.original_dimensions.width/t.target.clientWidth,this.factor_h=this.original_dimensions.height/t.target.clientHeight,this.setStartPosition()}),!1)}},this.events);return this.min_width&&this.min_height&&(t.aspectRatio="fixed"===this.ratio?this.min_height/this.min_width:null,t.minSize=[this.min_width,this.min_height,"px"],this.limit_width=this.min_width,this.limit_height=this.min_height),this.max_width&&this.max_height&&(t.aspectRatio="fixed"===this.ratio?this.max_height/this.max_width:null,t.maxSize=[this.max_width,this.max_height,"px"],this.limit_width=this.max_width,this.limit_height=this.max_height),new k(this.el,t)}getCropArea(){let t=this.cropInstance.getValue(),i={width:this.roundSize(t.width*this.factor_w,this.limit_width),height:this.roundSize(t.height*this.factor_h,this.limit_height)};return i.left=this.adjustPosition(t.x*this.factor_w,i.width,this.original_dimensions.width),i.top=this.adjustPosition(t.y*this.factor_h,i.height,this.original_dimensions.height),i}setStartPosition(){let t={width:10,height:10};if(this.max_width&&this.max_height&&(this.cropInstance.options.maxSize=t={width:this.max_width/this.factor_w,height:this.max_height/this.factor_h}),this.min_width&&this.min_height&&(this.cropInstance.options.minSize=t={width:this.min_width/this.factor_w,height:this.min_height/this.factor_h}),this.saved){let t={width:Math.round(this.saved.width/this.factor_w),height:Math.round(this.saved.height/this.factor_h),left:Math.round(this.saved.left/this.factor_w),top:Math.round(this.saved.top/this.factor_h)};this.cropInstance.resizeTo(t.width,t.height),this.cropInstance.moveTo(t.left,t.top)}else{let i=C({srcWidth:t.width,srcHeight:t.height,maxWidth:this.original_dimensions.width,maxHeight:this.original_dimensions.height});t={width:i.width/this.factor_w,height:i.height/this.factor_h},this.cropInstance.resizeTo(t.width,t.height),this.cropInstance.moveTo(0,0)}}validate(){if(this.min_width&&this.original_dimensions.width<this.min_width)throw new Error(`Image width (${this.original_dimensions.width}px) must be at least ${this.min_width}px`);if(this.min_height&&this.original_dimensions.height<this.min_height)throw new Error(`Image height (${this.original_dimensions.height}px) must be at least ${this.min_height}px`);if(this.min_width&&this.min_height&&this.max_width&&this.max_height&&"fixed"===this.ratio&&this.min_width/this.min_height!=this.max_width/this.max_height)throw new Error("Ratio must be same for min and max")}roundSize(t,i=null){return i&&i-t>=-1&&i-t<=1?i:Math.round(t)}adjustPosition(t,i,e){return t+i>e?e-i:Math.round(t)}}var S=function(){var t=this,i=t.$createElement,e=t._self._c||i;return e("k-overlay",{ref:"overlay",attrs:{autofocus:t.autofocus,centered:!0},on:{ready:function(i){return t.$emit("ready")}}},[e("div",{ref:"dialog",staticClass:"k-dialog",class:t.$vnode.data.staticClass,style:t.dialog_width,attrs:{"data-size":t.size},on:{mousedown:function(t){t.stopPropagation()}}},[t.notification?e("div",{staticClass:"k-dialog-notification",attrs:{"data-theme":t.notification.type}},[e("p",[t._v(t._s(t.notification.message))]),e("k-button",{attrs:{icon:"cancel"},on:{click:function(i){t.notification=null}}})],1):t._e(),t.image?e("div",{staticClass:"k-dialog-body"},[t.spinner?e("div",{staticClass:"preload"},[e("div",{staticClass:"spinner"},[e("div",{staticClass:"bounce1"}),e("div",{staticClass:"bounce2"}),e("div",{staticClass:"bounce3"})]),e("footer",{staticClass:"preload-dialog-footer"},[t._t("footer",(function(){return[e("k-button-group",[e("k-button",{staticClass:"k-dialog-button-cancel",attrs:{icon:"cancel"},on:{click:t.cancel}},[t._v(" "+t._s(t.$t("cancel"))+" ")])],1)]}))],2)]):t._e(),e("img",{attrs:{src:t.image.url,id:"croppr"}})]):t._e(),e("footer",{staticClass:"k-dialog-footer"},[t._t("footer",(function(){return[e("div",{staticClass:"ratio",staticStyle:{"margin-left":"1rem","margin-right":"1rem"}},[e("k-select-field",{attrs:{options:[{value:"free",text:"Free"},{value:"1/1",text:"1/1"},{value:"2/1",text:"2/1"}],required:!1,label:"Ratio",name:"ratio",help:""},on:{input:t.setRatio},model:{value:t.ratio,callback:function(i){t.ratio=i},expression:"ratio"}})],1),e("k-button-group",[e("k-button",{staticClass:"k-dialog-button-cancel",attrs:{icon:"cancel"},on:{click:t.cancel}},[t._v(" "+t._s(t.$t("cancel"))+" ")]),e("k-button",{staticClass:"k-dialog-button-submit",attrs:{icon:t.icon,theme:t.theme},on:{click:t.submit}},[t._v(" "+t._s(t.button||t.$t("confirm"))+" ")])],1)]}))],2)])])},A=[];const P={extends:"k-dialog",props:{image:{type:Object,default:null},clip:{type:Object,default:null}},data:()=>({cropprFacade:null,dialog_width:null,spinner:!0,freezeDialog:!1,was_moved:!1,ratio:"free"}),created(){this.$on("ready",this.isOpen,!1),this.$on("close",this.isClosed,!1)},destroyed(){this.$off("ready",this.isOpen,!1),this.$off("close",this.isClosed,!1)},methods:{getRatioX(){return parseInt(this.ratio.split("/")[0])},getRatioY(){return parseInt(this.ratio.split("/")[1])},setRatio(){"free"==this.ratio?this.clip={minwidth:null,minheight:null,ratio:null}:this.clip={minwidth:this.getRatioX(),minheight:this.getRatioY(),ratio:"fixed"},this.was_moved=!0,this.cropprFacade.setRatio({clip:this.clip})},initCropper(){let t=document.getElementById("croppr");t.addEventListener("load",this.hideSpinner,!1),t.complete&&this.hideSpinner();try{this.cropprFacade=new M({el:t,original_dimensions:this.image.dimensions,clip:this.clip,saved:this.image.clip,events:{onCropStart:()=>{this.freezeDialog=!0,this.was_moved=!0},onCropEnd:()=>{setTimeout((()=>{this.freezeDialog=!1}),200)}}}),window.addEventListener("resize",this.showSpinner,!1),window.addEventListener("resize",this.resizeDialog,!1)}catch(i){this.cancel(),console.error(this.image.id+": "+i.message),this.$store.dispatch("notification/error",i.message)}},isOpen(){this.setDialogWidth(),this.showSpinner(),this.$nextTick((()=>{this.initCropper()}))},isClosed(){window.removeEventListener("resize",this.showSpinner,!1),window.removeEventListener("resize",this.resizeDialog,!1)},cancel(){this.freezeDialog||(this.$emit("cancel"),this.close())},remToPx:(t=1)=>t*parseInt(getComputedStyle(document.documentElement).fontSize),submit(){this.was_moved&&(this.$emit("submit",{id:this.image.id,clip:this.cropprFacade.getCropArea(),ratio:this.ratio}),this.was_moved=!1),this.close()},setDialogWidth(){let t=window.innerWidth-this.remToPx(6),i=window.innerHeight-this.remToPx(12),e=C({srcWidth:this.image.dimensions.width,srcHeight:this.image.dimensions.height,maxWidth:t,maxHeight:i}),n=this.image.dimensions.width;(this.image.dimensions.width>t||this.image.dimensions.height>i)&&(n=e.width),this.dialog_width="width: "+n+"px;"},resizeDialog:function(t,i=100){let e;return function(...n){window.clearTimeout(e),e=window.setTimeout((()=>{t.apply(this,n)}),i)}}((function(){this.setDialogWidth();let t=this.cropprFacade.getCropArea();this.cropprFacade.reset({position:t,clip:this.clip,ratio:this.ratio}),this.spinner=!1}),500),hideSpinner:function(){this.spinner=!1},showSpinner:function(){!1===this.spinner&&(this.spinner=!0)}}},R={};var O=t(P,S,A,!1,$,null,null,null);function $(t){for(let i in R)this[i]=R[i]}var I=function(){return O.exports}();const B={};var T=t({extends:"k-files-field-preview"},undefined,undefined,!1,H,"3de9171a",null,null);function H(t){for(let i in B)this[i]=B[i]}var L=function(){return T.exports}();panel.plugin("mullema/image-clip",{fields:{"image-clip":o},components:{"k-clip-items":h,"k-clip-item":m,"k-clip-item-image":_,"k-clip-handle":E,"k-clip-dialog":I,"k-image-clip-field-preview":L}})}();
+var __defProp = Object.defineProperty;
+var __getOwnPropSymbols = Object.getOwnPropertySymbols;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __propIsEnum = Object.prototype.propertyIsEnumerable;
+var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
+var __spreadValues = (a, b) => {
+  for (var prop in b || (b = {}))
+    if (__hasOwnProp.call(b, prop))
+      __defNormalProp(a, prop, b[prop]);
+  if (__getOwnPropSymbols)
+    for (var prop of __getOwnPropSymbols(b)) {
+      if (__propIsEnum.call(b, prop))
+        __defNormalProp(a, prop, b[prop]);
+    }
+  return a;
+};
+(function() {
+  "use strict";
+  var render$6 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-field", _vm._b({ staticClass: "k-files-field", scopedSlots: _vm._u([_vm.more && !_vm.disabled ? { key: "options", fn: function() {
+      return [_c("k-button-group", { staticClass: "k-field-options" }, [_c("k-options-dropdown", _vm._b({ ref: "options", on: { "action": _vm.onAction } }, "k-options-dropdown", _vm.options, false))], 1)];
+    }, proxy: true } : null], null, true) }, "k-field", _vm.$props, false), [_c("k-dropzone", { attrs: { "disabled": _vm.more === false }, on: { "drop": _vm.drop } }, [_vm.selected.length ? [_c("k-clip-items", { attrs: { "items": _vm.selected, "layout": _vm.layout, "size": _vm.size, "sortable": !_vm.disabled && _vm.selected.length > 1 }, on: { "sort": _vm.onInput, "sortChange": function($event) {
+      return _vm.$emit("change", $event);
+    }, "openClipDialog": _vm.openClipDialog }, scopedSlots: _vm._u([{ key: "options", fn: function(ref) {
+      var index = ref.index;
+      return [!_vm.disabled ? _c("k-button", { attrs: { "tooltip": _vm.$t("remove"), "icon": "remove" }, on: { "click": function($event) {
+        return _vm.remove(index);
+      } } }) : _vm._e()];
+    } }], null, false, 1805525116) })] : _c("k-empty", { attrs: { "layout": _vm.layout, "data-invalid": _vm.isInvalid, "icon": "image" }, on: { "click": _vm.prompt } }, [_vm._v(" " + _vm._s(_vm.empty || _vm.$t("field.files.empty")) + " ")])], 2), _c("k-files-dialog", { ref: "selector", on: { "submit": _vm.select } }), _c("k-upload", { ref: "fileUpload", on: { "success": _vm.upload } }), _c("k-clip-dialog", { ref: "clip", attrs: { "size": "large", "image": _vm.clip_image, "clip": _vm.clip, "ratios": _vm.ratios }, on: { "submit": _vm.clippedArea } })], 1);
+  };
+  var staticRenderFns$6 = [];
+  render$6._withStripped = true;
+  function normalizeComponent(scriptExports, render2, staticRenderFns2, functionalTemplate, injectStyles2, scopeId, moduleIdentifier, shadowMode) {
+    var options = typeof scriptExports === "function" ? scriptExports.options : scriptExports;
+    if (render2) {
+      options.render = render2;
+      options.staticRenderFns = staticRenderFns2;
+      options._compiled = true;
+    }
+    if (functionalTemplate) {
+      options.functional = true;
+    }
+    if (scopeId) {
+      options._scopeId = "data-v-" + scopeId;
+    }
+    var hook;
+    if (moduleIdentifier) {
+      hook = function(context) {
+        context = context || this.$vnode && this.$vnode.ssrContext || this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext;
+        if (!context && typeof __VUE_SSR_CONTEXT__ !== "undefined") {
+          context = __VUE_SSR_CONTEXT__;
+        }
+        if (injectStyles2) {
+          injectStyles2.call(this, context);
+        }
+        if (context && context._registeredComponents) {
+          context._registeredComponents.add(moduleIdentifier);
+        }
+      };
+      options._ssrRegister = hook;
+    } else if (injectStyles2) {
+      hook = shadowMode ? function() {
+        injectStyles2.call(this, (options.functional ? this.parent : this).$root.$options.shadowRoot);
+      } : injectStyles2;
+    }
+    if (hook) {
+      if (options.functional) {
+        options._injectStyles = hook;
+        var originalRender = options.render;
+        options.render = function renderWithStyleInjection(h, context) {
+          hook.call(context);
+          return originalRender(h, context);
+        };
+      } else {
+        var existing = options.beforeCreate;
+        options.beforeCreate = existing ? [].concat(existing, hook) : [hook];
+      }
+    }
+    return {
+      exports: scriptExports,
+      options
+    };
+  }
+  const script$6 = {
+    extends: "k-files-field",
+    props: {
+      clip: {
+        type: Object,
+        default: null
+      },
+      ratios: {
+        type: Array,
+        default: [{ value: "free", text: "Free" }]
+      }
+    },
+    data() {
+      return {
+        clip_image: {}
+      };
+    },
+    methods: {
+      openClipDialog(id) {
+        this.clip_image = this.value.find((item) => item.id === id);
+        this.$refs.clip.open();
+      },
+      clippedArea(data) {
+        this.clip_image.clip = data.clip;
+        this.onInput();
+        this.getPreview(data.id, data.clip);
+      },
+      getPreview(image_id, clip) {
+        this.$api.post(this.endpoints.field + "/preview", {
+          id: image_id,
+          width: clip.width,
+          height: clip.height,
+          top: clip.top,
+          left: clip.left
+        }).then((data) => {
+          if (data.image) {
+            let field_name = this.name;
+            let content_id = this.$store.state.content.current;
+            let field_model = this.$store.getters["content/values"](content_id)[field_name];
+            if (field_model) {
+              let changed_image = field_model.find((image) => image.id === image_id);
+              changed_image.image = data.image;
+              this.$store.dispatch("content/update", [field_name, field_model, content_id]);
+            } else {
+              let updated_image = this.selected.find((image) => image.id === image_id);
+              updated_image.image = data.image;
+            }
+          } else {
+            throw new Error("image clip: no image for preview received.");
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
+      }
+    }
+  };
+  const __cssModules$6 = {};
+  var __component__$6 = /* @__PURE__ */ normalizeComponent(script$6, render$6, staticRenderFns$6, false, injectStyles$6, null, null, null);
+  function injectStyles$6(context) {
+    for (let o in __cssModules$6) {
+      this[o] = __cssModules$6[o];
+    }
+  }
+  __component__$6.options.__file = "src/fields/imageClip.vue";
+  var imageClip = /* @__PURE__ */ function() {
+    return __component__$6.exports;
+  }();
+  var render$5 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-draggable", { staticClass: "k-items", class: "k-" + _vm.layout + "-items", attrs: { "handle": true, "options": _vm.dragOptions, "data-layout": _vm.layout, "data-size": _vm.size, "list": _vm.items }, on: { "change": function($event) {
+      return _vm.$emit("change", $event);
+    }, "end": function($event) {
+      return _vm.$emit("sort", _vm.items, $event);
+    } } }, [_vm._t("default", function() {
+      return _vm._l(_vm.items, function(item, itemIndex) {
+        return _c("k-clip-item", _vm._b({ key: item.id || itemIndex, class: { "k-draggable-item": _vm.sortable && item.sortable }, attrs: { "image": _vm.imageOptions(item), "layout": _vm.layout, "sortable": _vm.sortable && item.sortable, "width": item.column }, on: { "click": function($event) {
+          return _vm.$emit("item", item, itemIndex);
+        }, "drag": function($event) {
+          return _vm.onDragStart($event, item.dragText);
+        }, "flag": function($event) {
+          return _vm.$emit("flag", item, itemIndex);
+        }, "option": function($event) {
+          return _vm.$emit("option", $event, item, itemIndex);
+        }, "openClipDialog": function(id) {
+          return _vm.$emit("openClipDialog", id);
+        } }, nativeOn: { "mouseover": function($event) {
+          return _vm.$emit("hover", $event, item, itemIndex);
+        } }, scopedSlots: _vm._u([{ key: "options", fn: function() {
+          return [_vm._t("options", null, { "item": item, "index": itemIndex })];
+        }, proxy: true }], null, true) }, "k-clip-item", item, false));
+      });
+    })], 2);
+  };
+  var staticRenderFns$5 = [];
+  render$5._withStripped = true;
+  var clipItems_vue_vue_type_style_index_0_scoped_true_lang = "";
+  const script$5 = {
+    extends: "k-items",
+    computed: {}
+  };
+  const __cssModules$5 = {};
+  var __component__$5 = /* @__PURE__ */ normalizeComponent(script$5, render$5, staticRenderFns$5, false, injectStyles$5, "0b060670", null, null);
+  function injectStyles$5(context) {
+    for (let o in __cssModules$5) {
+      this[o] = __cssModules$5[o];
+    }
+  }
+  __component__$5.options.__file = "src/components/clipItems.vue";
+  var clipItems = /* @__PURE__ */ function() {
+    return __component__$5.exports;
+  }();
+  var render$4 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("article", _vm._b({ staticClass: "k-item", class: _vm.layout ? "k-" + _vm.layout + "-item" : false, attrs: { "data-has-figure": _vm.hasFigure, "data-has-info": Boolean(_vm.info), "data-has-label": Boolean(_vm.label), "data-has-options": Boolean(_vm.options), "tabindex": "-1" }, on: { "click": function($event) {
+      return _vm.$emit("click", $event);
+    }, "dragstart": function($event) {
+      return _vm.$emit("drag", $event);
+    } } }, "article", _vm.data, false), [_vm.hasFigure ? _c("k-clip-item-image", { attrs: { "image": _vm.image, "layout": _vm.layout, "width": _vm.width, "id": _vm.id, "resizable": _vm.resizable, "disabled": _vm.disabled }, on: { "clicked": function($event) {
+      return _vm.$emit("openClipDialog", _vm.id);
+    } } }) : _vm._e(), _vm.sortable ? _c("k-sort-handle", { staticClass: "k-item-sort-handle" }) : _vm._e(), _c("header", { staticClass: "k-item-content" }, [_c("h3", { staticClass: "k-item-title" }, [_vm.link ? _c("k-link", { staticClass: "k-item-title-link", attrs: { "target": _vm.target, "to": _vm.link } }, [_c("span", { domProps: { "innerHTML": _vm._s(_vm.title) } })]) : _c("span", { domProps: { "innerHTML": _vm._s(_vm.title) } })], 1), _vm.info ? _c("p", { staticClass: "k-item-info", domProps: { "innerHTML": _vm._s(_vm.info) } }) : _vm._e()]), _vm.flag || _vm.options || _vm.$slots.options ? _c("footer", { staticClass: "k-item-footer" }, [_c("nav", { staticClass: "k-item-buttons", on: { "click": function($event) {
+      $event.stopPropagation();
+    } } }, [_vm.flag ? _c("k-status-icon", _vm._b({}, "k-status-icon", _vm.flag, false)) : _vm._e(), _vm._t("options", function() {
+      return [_vm.options ? _c("k-options-dropdown", { staticClass: "k-item-options-dropdown", attrs: { "options": _vm.options }, on: { "option": _vm.onOption } }) : _vm._e()];
+    })], 2)]) : _vm._e()], 1);
+  };
+  var staticRenderFns$4 = [];
+  render$4._withStripped = true;
+  const script$4 = {
+    extends: "k-item",
+    props: {
+      id: String,
+      resizable: Boolean,
+      disabled: Boolean
+    },
+    computed: {
+      hasFigure() {
+        return this.image !== false && Object.keys(this.image).length > 0;
+      },
+      title() {
+        return this.text || "-";
+      }
+    }
+  };
+  const __cssModules$4 = {};
+  var __component__$4 = /* @__PURE__ */ normalizeComponent(script$4, render$4, staticRenderFns$4, false, injectStyles$4, null, null, null);
+  function injectStyles$4(context) {
+    for (let o in __cssModules$4) {
+      this[o] = __cssModules$4[o];
+    }
+  }
+  __component__$4.options.__file = "src/components/clipItem.vue";
+  var clipItem = /* @__PURE__ */ function() {
+    return __component__$4.exports;
+  }();
+  var render$3 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _vm.image ? _c("div", { staticClass: "k-item-figure relative", style: { background: _vm.$helper.color(_vm.back) } }, [_vm.resizable && !_vm.disabled ? _c("k-clip-handle", { attrs: { "layout": _vm.layout }, on: { "clicked": function($event) {
+      return _vm.$emit("clicked");
+    } } }) : _vm._e(), _vm.image.src ? _c("k-image", { staticClass: "k-item-image", attrs: { "cover": _vm.image.cover, "ratio": _vm.ratio, "sizes": _vm.sizes, "src": _vm.image.src, "srcset": _vm.image.srcset } }) : _c("k-aspect-ratio", { attrs: { "ratio": _vm.ratio } }, [_c("k-icon", { staticClass: "k-item-icon", attrs: { "color": _vm.$helper.color(_vm.image.color), "size": _vm.size, "type": _vm.image.icon } })], 1)], 1) : _vm._e();
+  };
+  var staticRenderFns$3 = [];
+  render$3._withStripped = true;
+  var clipItemImage_vue_vue_type_style_index_0_scoped_true_lang = "";
+  const script$3 = {
+    extends: "k-item-image",
+    props: {
+      id: String,
+      resizable: Boolean,
+      disabled: Boolean
+    }
+  };
+  const __cssModules$3 = {};
+  var __component__$3 = /* @__PURE__ */ normalizeComponent(script$3, render$3, staticRenderFns$3, false, injectStyles$3, "413d20b8", null, null);
+  function injectStyles$3(context) {
+    for (let o in __cssModules$3) {
+      this[o] = __cssModules$3[o];
+    }
+  }
+  __component__$3.options.__file = "src/components/clipItemImage.vue";
+  var clipItemImage = /* @__PURE__ */ function() {
+    return __component__$3.exports;
+  }();
+  var __$_require_a1bf4a12__ = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgBAMAAAAQtmoLAAAAMFBMVEUAAAAzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzMzPzX0yTAAAAD3RSTlMAQIDAEPDQYLAgoFBwMJALzXfXAAAAsElEQVRYw+3TPQoCMRCG4RgXVEQwrVXwFhbilt7AQu+QvYl7BQ9h72XshUUtP+NPQImBDAq7Webtn2I+GMFxXG1JVAzaDjJlm+CivMrvoINQOhnwSPpHG2jarAsGDH4BOREs1zQwMpiRwB44HwhAwlaV0SDb4t5GiOEqCvTxbG5lEQO6eHUErtHAVVDBKU3Qm76lG/MPH2CnbHkIhBonAwbKy7ijY3OzMmg74Djuj90AekzAtvxv03QAAAAASUVORK5CYII=";
+  var render$2 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("span", { class: "k-sort-handle k-item-sort-handle k-icon k-icon-sort clip-handle " + _vm.layout + "-handle", attrs: { "aria-hidden": "true" } }, [_c("img", { staticClass: "clipicon", attrs: { "src": __$_require_a1bf4a12__, "alt": "Clip" }, on: { "click": _vm.open } })]);
+  };
+  var staticRenderFns$2 = [];
+  render$2._withStripped = true;
+  var clipHandle_vue_vue_type_style_index_0_scoped_true_lang = "";
+  const script$2 = {
+    extends: "k-sort-handle",
+    props: {
+      layout: String
+    },
+    methods: {
+      open() {
+        this.$emit("clicked");
+      }
+    }
+  };
+  const __cssModules$2 = {};
+  var __component__$2 = /* @__PURE__ */ normalizeComponent(script$2, render$2, staticRenderFns$2, false, injectStyles$2, "222403a8", null, null);
+  function injectStyles$2(context) {
+    for (let o in __cssModules$2) {
+      this[o] = __cssModules$2[o];
+    }
+  }
+  __component__$2.options.__file = "src/components/clipHandle.vue";
+  var clipHandle = /* @__PURE__ */ function() {
+    return __component__$2.exports;
+  }();
+  var commonjsGlobal = typeof globalThis !== "undefined" ? globalThis : typeof window !== "undefined" ? window : typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : {};
+  var croppr = { exports: {} };
+  (function(module, exports) {
+    (function(global2, factory) {
+      module.exports = factory();
+    })(commonjsGlobal, function() {
+      (function() {
+        var lastTime = 0;
+        var vendors = ["ms", "moz", "webkit", "o"];
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+          window.requestAnimationFrame = window[vendors[x] + "RequestAnimationFrame"];
+          window.cancelAnimationFrame = window[vendors[x] + "CancelAnimationFrame"] || window[vendors[x] + "CancelRequestAnimationFrame"];
+        }
+        if (!window.requestAnimationFrame)
+          window.requestAnimationFrame = function(callback, element) {
+            var currTime = new Date().getTime();
+            var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+            var id = window.setTimeout(function() {
+              callback(currTime + timeToCall);
+            }, timeToCall);
+            lastTime = currTime + timeToCall;
+            return id;
+          };
+        if (!window.cancelAnimationFrame)
+          window.cancelAnimationFrame = function(id) {
+            clearTimeout(id);
+          };
+      })();
+      (function() {
+        if (typeof window.CustomEvent === "function")
+          return false;
+        function CustomEvent2(event, params) {
+          params = params || { bubbles: false, cancelable: false, detail: void 0 };
+          var evt = document.createEvent("CustomEvent");
+          evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+          return evt;
+        }
+        CustomEvent2.prototype = window.Event.prototype;
+        window.CustomEvent = CustomEvent2;
+      })();
+      (function(window2) {
+        try {
+          new CustomEvent("test");
+          return false;
+        } catch (e) {
+        }
+        function MouseEvent2(eventType, params) {
+          params = params || { bubbles: false, cancelable: false };
+          var mouseEvent = document.createEvent("MouseEvent");
+          mouseEvent.initMouseEvent(eventType, params.bubbles, params.cancelable, window2, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+          return mouseEvent;
+        }
+        MouseEvent2.prototype = Event.prototype;
+        window2.MouseEvent = MouseEvent2;
+      })(window);
+      var classCallCheck = function(instance, Constructor) {
+        if (!(instance instanceof Constructor)) {
+          throw new TypeError("Cannot call a class as a function");
+        }
+      };
+      var createClass = function() {
+        function defineProperties(target, props) {
+          for (var i = 0; i < props.length; i++) {
+            var descriptor = props[i];
+            descriptor.enumerable = descriptor.enumerable || false;
+            descriptor.configurable = true;
+            if ("value" in descriptor)
+              descriptor.writable = true;
+            Object.defineProperty(target, descriptor.key, descriptor);
+          }
+        }
+        return function(Constructor, protoProps, staticProps) {
+          if (protoProps)
+            defineProperties(Constructor.prototype, protoProps);
+          if (staticProps)
+            defineProperties(Constructor, staticProps);
+          return Constructor;
+        };
+      }();
+      var get = function get2(object, property, receiver) {
+        if (object === null)
+          object = Function.prototype;
+        var desc = Object.getOwnPropertyDescriptor(object, property);
+        if (desc === void 0) {
+          var parent = Object.getPrototypeOf(object);
+          if (parent === null) {
+            return void 0;
+          } else {
+            return get2(parent, property, receiver);
+          }
+        } else if ("value" in desc) {
+          return desc.value;
+        } else {
+          var getter = desc.get;
+          if (getter === void 0) {
+            return void 0;
+          }
+          return getter.call(receiver);
+        }
+      };
+      var inherits = function(subClass, superClass) {
+        if (typeof superClass !== "function" && superClass !== null) {
+          throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+        }
+        subClass.prototype = Object.create(superClass && superClass.prototype, {
+          constructor: {
+            value: subClass,
+            enumerable: false,
+            writable: true,
+            configurable: true
+          }
+        });
+        if (superClass)
+          Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass;
+      };
+      var possibleConstructorReturn = function(self2, call) {
+        if (!self2) {
+          throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+        }
+        return call && (typeof call === "object" || typeof call === "function") ? call : self2;
+      };
+      var slicedToArray = function() {
+        function sliceIterator(arr, i) {
+          var _arr = [];
+          var _n = true;
+          var _d = false;
+          var _e = void 0;
+          try {
+            for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+              _arr.push(_s.value);
+              if (i && _arr.length === i)
+                break;
+            }
+          } catch (err) {
+            _d = true;
+            _e = err;
+          } finally {
+            try {
+              if (!_n && _i["return"])
+                _i["return"]();
+            } finally {
+              if (_d)
+                throw _e;
+            }
+          }
+          return _arr;
+        }
+        return function(arr, i) {
+          if (Array.isArray(arr)) {
+            return arr;
+          } else if (Symbol.iterator in Object(arr)) {
+            return sliceIterator(arr, i);
+          } else {
+            throw new TypeError("Invalid attempt to destructure non-iterable instance");
+          }
+        };
+      }();
+      var Handle = function Handle2(position, constraints, cursor, eventBus) {
+        classCallCheck(this, Handle2);
+        var self2 = this;
+        this.position = position;
+        this.constraints = constraints;
+        this.cursor = cursor;
+        this.eventBus = eventBus;
+        this.el = document.createElement("div");
+        this.el.className = "croppr-handle";
+        this.el.style.cursor = cursor;
+        this.el.addEventListener("mousedown", onMouseDown);
+        function onMouseDown(e) {
+          e.stopPropagation();
+          document.addEventListener("mouseup", onMouseUp);
+          document.addEventListener("mousemove", onMouseMove);
+          self2.eventBus.dispatchEvent(new CustomEvent("handlestart", {
+            detail: { handle: self2 }
+          }));
+        }
+        function onMouseUp(e) {
+          e.stopPropagation();
+          document.removeEventListener("mouseup", onMouseUp);
+          document.removeEventListener("mousemove", onMouseMove);
+          self2.eventBus.dispatchEvent(new CustomEvent("handleend", {
+            detail: { handle: self2 }
+          }));
+        }
+        function onMouseMove(e) {
+          e.stopPropagation();
+          self2.eventBus.dispatchEvent(new CustomEvent("handlemove", {
+            detail: { mouseX: e.clientX, mouseY: e.clientY }
+          }));
+        }
+      };
+      var Box = function() {
+        function Box2(x1, y1, x2, y2) {
+          classCallCheck(this, Box2);
+          this.x1 = x1;
+          this.y1 = y1;
+          this.x2 = x2;
+          this.y2 = y2;
+        }
+        createClass(Box2, [{
+          key: "set",
+          value: function set$$1() {
+            var x1 = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : null;
+            var y1 = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : null;
+            var x2 = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : null;
+            var y2 = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
+            this.x1 = x1 == null ? this.x1 : x1;
+            this.y1 = y1 == null ? this.y1 : y1;
+            this.x2 = x2 == null ? this.x2 : x2;
+            this.y2 = y2 == null ? this.y2 : y2;
+            return this;
+          }
+        }, {
+          key: "width",
+          value: function width() {
+            return Math.abs(this.x2 - this.x1);
+          }
+        }, {
+          key: "height",
+          value: function height() {
+            return Math.abs(this.y2 - this.y1);
+          }
+        }, {
+          key: "resize",
+          value: function resize(newWidth, newHeight) {
+            var origin = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : [0, 0];
+            var fromX = this.x1 + this.width() * origin[0];
+            var fromY = this.y1 + this.height() * origin[1];
+            this.x1 = fromX - newWidth * origin[0];
+            this.y1 = fromY - newHeight * origin[1];
+            this.x2 = this.x1 + newWidth;
+            this.y2 = this.y1 + newHeight;
+            return this;
+          }
+        }, {
+          key: "scale",
+          value: function scale(factor) {
+            var origin = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : [0, 0];
+            var newWidth = this.width() * factor;
+            var newHeight = this.height() * factor;
+            this.resize(newWidth, newHeight, origin);
+            return this;
+          }
+        }, {
+          key: "move",
+          value: function move() {
+            var x = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : null;
+            var y = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : null;
+            var width = this.width();
+            var height = this.height();
+            x = x === null ? this.x1 : x;
+            y = y === null ? this.y1 : y;
+            this.x1 = x;
+            this.y1 = y;
+            this.x2 = x + width;
+            this.y2 = y + height;
+            return this;
+          }
+        }, {
+          key: "getRelativePoint",
+          value: function getRelativePoint() {
+            var point = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [0, 0];
+            var x = this.width() * point[0];
+            var y = this.height() * point[1];
+            return [x, y];
+          }
+        }, {
+          key: "getAbsolutePoint",
+          value: function getAbsolutePoint() {
+            var point = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : [0, 0];
+            var x = this.x1 + this.width() * point[0];
+            var y = this.y1 + this.height() * point[1];
+            return [x, y];
+          }
+        }, {
+          key: "constrainToRatio",
+          value: function constrainToRatio(ratio) {
+            var origin = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : [0, 0];
+            var grow = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : "height";
+            if (ratio === null) {
+              return;
+            }
+            this.width();
+            this.height();
+            switch (grow) {
+              case "height":
+                this.resize(this.width(), this.width() * ratio, origin);
+                break;
+              case "width":
+                this.resize(this.height() * 1 / ratio, this.height(), origin);
+                break;
+              default:
+                this.resize(this.width(), this.width() * ratio, origin);
+            }
+            return this;
+          }
+        }, {
+          key: "constrainToBoundary",
+          value: function constrainToBoundary(boundaryWidth, boundaryHeight) {
+            var origin = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : [0, 0];
+            var _getAbsolutePoint = this.getAbsolutePoint(origin), _getAbsolutePoint2 = slicedToArray(_getAbsolutePoint, 2), originX = _getAbsolutePoint2[0], originY = _getAbsolutePoint2[1];
+            var maxIfLeft = originX;
+            var maxIfTop = originY;
+            var maxIfRight = boundaryWidth - originX;
+            var maxIfBottom = boundaryHeight - originY;
+            var directionX = -2 * origin[0] + 1;
+            var directionY = -2 * origin[1] + 1;
+            var maxWidth = null, maxHeight = null;
+            switch (directionX) {
+              case -1:
+                maxWidth = maxIfLeft;
+                break;
+              case 0:
+                maxWidth = Math.min(maxIfLeft, maxIfRight) * 2;
+                break;
+              case 1:
+                maxWidth = maxIfRight;
+                break;
+            }
+            switch (directionY) {
+              case -1:
+                maxHeight = maxIfTop;
+                break;
+              case 0:
+                maxHeight = Math.min(maxIfTop, maxIfBottom) * 2;
+                break;
+              case 1:
+                maxHeight = maxIfBottom;
+                break;
+            }
+            if (this.width() > maxWidth) {
+              var factor = maxWidth / this.width();
+              this.scale(factor, origin);
+            }
+            if (this.height() > maxHeight) {
+              var _factor = maxHeight / this.height();
+              this.scale(_factor, origin);
+            }
+            return this;
+          }
+        }, {
+          key: "constrainToSize",
+          value: function constrainToSize() {
+            var maxWidth = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : null;
+            var maxHeight = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : null;
+            var minWidth = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : null;
+            var minHeight = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : null;
+            var origin = arguments.length > 4 && arguments[4] !== void 0 ? arguments[4] : [0, 0];
+            var ratio = arguments.length > 5 && arguments[5] !== void 0 ? arguments[5] : null;
+            if (ratio) {
+              if (ratio > 1) {
+                maxWidth = maxHeight * 1 / ratio;
+                minHeight = minWidth * ratio;
+              } else if (ratio < 1) {
+                maxHeight = maxWidth * ratio;
+                minWidth = minHeight * 1 / ratio;
+              }
+            }
+            if (maxWidth && this.width() > maxWidth) {
+              var newWidth = maxWidth, newHeight = ratio === null ? this.height() : maxHeight;
+              this.resize(newWidth, newHeight, origin);
+            }
+            if (maxHeight && this.height() > maxHeight) {
+              var _newWidth = ratio === null ? this.width() : maxWidth, _newHeight = maxHeight;
+              this.resize(_newWidth, _newHeight, origin);
+            }
+            if (minWidth && this.width() < minWidth) {
+              var _newWidth2 = minWidth, _newHeight2 = ratio === null ? this.height() : minHeight;
+              this.resize(_newWidth2, _newHeight2, origin);
+            }
+            if (minHeight && this.height() < minHeight) {
+              var _newWidth3 = ratio === null ? this.width() : minWidth, _newHeight3 = minHeight;
+              this.resize(_newWidth3, _newHeight3, origin);
+            }
+            return this;
+          }
+        }]);
+        return Box2;
+      }();
+      function enableTouch(element) {
+        element.addEventListener("touchstart", simulateMouseEvent);
+        element.addEventListener("touchend", simulateMouseEvent);
+        element.addEventListener("touchmove", simulateMouseEvent);
+      }
+      function simulateMouseEvent(e) {
+        e.preventDefault();
+        var touch = e.changedTouches[0];
+        var eventMap = {
+          "touchstart": "mousedown",
+          "touchmove": "mousemove",
+          "touchend": "mouseup"
+        };
+        touch.target.dispatchEvent(new MouseEvent(eventMap[e.type], {
+          bubbles: true,
+          cancelable: true,
+          view: window,
+          clientX: touch.clientX,
+          clientY: touch.clientY,
+          screenX: touch.screenX,
+          screenY: touch.screenY
+        }));
+      }
+      var HANDLES = [{ position: [0, 0], constraints: [1, 0, 0, 1], cursor: "nw-resize" }, { position: [0.5, 0], constraints: [1, 0, 0, 0], cursor: "n-resize" }, { position: [1, 0], constraints: [1, 1, 0, 0], cursor: "ne-resize" }, { position: [1, 0.5], constraints: [0, 1, 0, 0], cursor: "e-resize" }, { position: [1, 1], constraints: [0, 1, 1, 0], cursor: "se-resize" }, { position: [0.5, 1], constraints: [0, 0, 1, 0], cursor: "s-resize" }, { position: [0, 1], constraints: [0, 0, 1, 1], cursor: "sw-resize" }, { position: [0, 0.5], constraints: [0, 0, 0, 1], cursor: "w-resize" }];
+      var CropprCore = function() {
+        function CropprCore2(element, options) {
+          var _this = this;
+          var deferred = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : false;
+          classCallCheck(this, CropprCore2);
+          this.options = CropprCore2.parseOptions(options || {});
+          if (!element.nodeName) {
+            element = document.querySelector(element);
+            if (element == null) {
+              throw "Unable to find element.";
+            }
+          }
+          if (!element.getAttribute("src")) {
+            throw "Image src not provided.";
+          }
+          this._initialized = false;
+          this._restore = {
+            parent: element.parentNode,
+            element
+          };
+          if (!deferred) {
+            if (element.width === 0 || element.height === 0) {
+              element.onload = function() {
+                _this.initialize(element);
+              };
+            } else {
+              this.initialize(element);
+            }
+          }
+        }
+        createClass(CropprCore2, [{
+          key: "initialize",
+          value: function initialize(element) {
+            this.createDOM(element);
+            this.options.convertToPixels(this.cropperEl);
+            this.attachHandlerEvents();
+            this.attachRegionEvents();
+            this.attachOverlayEvents();
+            this.box = this.initializeBox(this.options);
+            this.redraw();
+            this._initialized = true;
+            if (this.options.onInitialize !== null) {
+              this.options.onInitialize(this);
+            }
+          }
+        }, {
+          key: "createDOM",
+          value: function createDOM(targetEl) {
+            this.containerEl = document.createElement("div");
+            this.containerEl.className = "croppr-container";
+            this.eventBus = this.containerEl;
+            enableTouch(this.containerEl);
+            this.cropperEl = document.createElement("div");
+            this.cropperEl.className = "croppr";
+            this.imageEl = document.createElement("img");
+            this.imageEl.setAttribute("src", targetEl.getAttribute("src"));
+            this.imageEl.setAttribute("alt", targetEl.getAttribute("alt"));
+            this.imageEl.className = "croppr-image";
+            this.imageClippedEl = this.imageEl.cloneNode();
+            this.imageClippedEl.className = "croppr-imageClipped";
+            this.regionEl = document.createElement("div");
+            this.regionEl.className = "croppr-region";
+            this.overlayEl = document.createElement("div");
+            this.overlayEl.className = "croppr-overlay";
+            var handleContainerEl = document.createElement("div");
+            handleContainerEl.className = "croppr-handleContainer";
+            this.handles = [];
+            for (var i = 0; i < HANDLES.length; i++) {
+              var handle = new Handle(HANDLES[i].position, HANDLES[i].constraints, HANDLES[i].cursor, this.eventBus);
+              this.handles.push(handle);
+              handleContainerEl.appendChild(handle.el);
+            }
+            this.cropperEl.appendChild(this.imageEl);
+            this.cropperEl.appendChild(this.imageClippedEl);
+            this.cropperEl.appendChild(this.regionEl);
+            this.cropperEl.appendChild(this.overlayEl);
+            this.cropperEl.appendChild(handleContainerEl);
+            this.containerEl.appendChild(this.cropperEl);
+            targetEl.parentElement.replaceChild(this.containerEl, targetEl);
+          }
+        }, {
+          key: "setImage",
+          value: function setImage(src) {
+            var _this2 = this;
+            this.imageEl.onload = function() {
+              _this2.box = _this2.initializeBox(_this2.options);
+              _this2.redraw();
+            };
+            this.imageEl.src = src;
+            this.imageClippedEl.src = src;
+            return this;
+          }
+        }, {
+          key: "destroy",
+          value: function destroy() {
+            this._restore.parent.replaceChild(this._restore.element, this.containerEl);
+          }
+        }, {
+          key: "initializeBox",
+          value: function initializeBox(opts) {
+            var width = opts.startSize.width;
+            var height = opts.startSize.height;
+            var box = new Box(0, 0, width, height);
+            box.constrainToRatio(opts.aspectRatio, [0.5, 0.5]);
+            var min = opts.minSize;
+            var max = opts.maxSize;
+            box.constrainToSize(max.width, max.height, min.width, min.height, [0.5, 0.5], opts.aspectRatio);
+            var parentWidth = this.cropperEl.offsetWidth;
+            var parentHeight = this.cropperEl.offsetHeight;
+            box.constrainToBoundary(parentWidth, parentHeight, [0.5, 0.5]);
+            var x = this.cropperEl.offsetWidth / 2 - box.width() / 2;
+            var y = this.cropperEl.offsetHeight / 2 - box.height() / 2;
+            box.move(x, y);
+            return box;
+          }
+        }, {
+          key: "redraw",
+          value: function redraw() {
+            var _this3 = this;
+            var width = Math.round(this.box.width()), height = Math.round(this.box.height()), x1 = Math.round(this.box.x1), y1 = Math.round(this.box.y1), x2 = Math.round(this.box.x2), y2 = Math.round(this.box.y2);
+            window.requestAnimationFrame(function() {
+              _this3.regionEl.style.transform = "translate(" + x1 + "px, " + y1 + "px)";
+              _this3.regionEl.style.width = width + "px";
+              _this3.regionEl.style.height = height + "px";
+              _this3.imageClippedEl.style.clip = "rect(" + y1 + "px, " + x2 + "px, " + y2 + "px, " + x1 + "px)";
+              var center = _this3.box.getAbsolutePoint([0.5, 0.5]);
+              var xSign = center[0] - _this3.cropperEl.offsetWidth / 2 >> 31;
+              var ySign = center[1] - _this3.cropperEl.offsetHeight / 2 >> 31;
+              var quadrant = (xSign ^ ySign) + ySign + ySign + 4;
+              var foregroundHandleIndex = -2 * quadrant + 8;
+              for (var i = 0; i < _this3.handles.length; i++) {
+                var handle = _this3.handles[i];
+                var handleWidth = handle.el.offsetWidth;
+                var handleHeight = handle.el.offsetHeight;
+                var left = x1 + width * handle.position[0] - handleWidth / 2;
+                var top = y1 + height * handle.position[1] - handleHeight / 2;
+                handle.el.style.transform = "translate(" + Math.round(left) + "px, " + Math.round(top) + "px)";
+                handle.el.style.zIndex = foregroundHandleIndex == i ? 5 : 4;
+              }
+            });
+          }
+        }, {
+          key: "attachHandlerEvents",
+          value: function attachHandlerEvents() {
+            var eventBus = this.eventBus;
+            eventBus.addEventListener("handlestart", this.onHandleMoveStart.bind(this));
+            eventBus.addEventListener("handlemove", this.onHandleMoveMoving.bind(this));
+            eventBus.addEventListener("handleend", this.onHandleMoveEnd.bind(this));
+          }
+        }, {
+          key: "attachRegionEvents",
+          value: function attachRegionEvents() {
+            var eventBus = this.eventBus;
+            this.regionEl.addEventListener("mousedown", onMouseDown);
+            eventBus.addEventListener("regionstart", this.onRegionMoveStart.bind(this));
+            eventBus.addEventListener("regionmove", this.onRegionMoveMoving.bind(this));
+            eventBus.addEventListener("regionend", this.onRegionMoveEnd.bind(this));
+            function onMouseDown(e) {
+              e.stopPropagation();
+              document.addEventListener("mouseup", onMouseUp);
+              document.addEventListener("mousemove", onMouseMove);
+              eventBus.dispatchEvent(new CustomEvent("regionstart", {
+                detail: { mouseX: e.clientX, mouseY: e.clientY }
+              }));
+            }
+            function onMouseMove(e) {
+              e.stopPropagation();
+              eventBus.dispatchEvent(new CustomEvent("regionmove", {
+                detail: { mouseX: e.clientX, mouseY: e.clientY }
+              }));
+            }
+            function onMouseUp(e) {
+              e.stopPropagation();
+              document.removeEventListener("mouseup", onMouseUp);
+              document.removeEventListener("mousemove", onMouseMove);
+              eventBus.dispatchEvent(new CustomEvent("regionend", {
+                detail: { mouseX: e.clientX, mouseY: e.clientY }
+              }));
+            }
+          }
+        }, {
+          key: "attachOverlayEvents",
+          value: function attachOverlayEvents() {
+            var SOUTHEAST_HANDLE_IDX = 4;
+            var self2 = this;
+            var tmpBox = null;
+            this.overlayEl.addEventListener("mousedown", onMouseDown);
+            function onMouseDown(e) {
+              e.stopPropagation();
+              document.addEventListener("mouseup", onMouseUp);
+              document.addEventListener("mousemove", onMouseMove);
+              var container = self2.cropperEl.getBoundingClientRect();
+              var mouseX = e.clientX - container.left;
+              var mouseY = e.clientY - container.top;
+              tmpBox = self2.box;
+              self2.box = new Box(mouseX, mouseY, mouseX + 1, mouseY + 1);
+              self2.eventBus.dispatchEvent(new CustomEvent("handlestart", {
+                detail: { handle: self2.handles[SOUTHEAST_HANDLE_IDX] }
+              }));
+            }
+            function onMouseMove(e) {
+              e.stopPropagation();
+              self2.eventBus.dispatchEvent(new CustomEvent("handlemove", {
+                detail: { mouseX: e.clientX, mouseY: e.clientY }
+              }));
+            }
+            function onMouseUp(e) {
+              e.stopPropagation();
+              document.removeEventListener("mouseup", onMouseUp);
+              document.removeEventListener("mousemove", onMouseMove);
+              if (self2.box.width() === 1 && self2.box.height() === 1) {
+                self2.box = tmpBox;
+                return;
+              }
+              self2.eventBus.dispatchEvent(new CustomEvent("handleend", {
+                detail: { mouseX: e.clientX, mouseY: e.clientY }
+              }));
+            }
+          }
+        }, {
+          key: "onHandleMoveStart",
+          value: function onHandleMoveStart(e) {
+            var handle = e.detail.handle;
+            var originPoint = [1 - handle.position[0], 1 - handle.position[1]];
+            var _box$getAbsolutePoint = this.box.getAbsolutePoint(originPoint), _box$getAbsolutePoint2 = slicedToArray(_box$getAbsolutePoint, 2), originX = _box$getAbsolutePoint2[0], originY = _box$getAbsolutePoint2[1];
+            this.activeHandle = { handle, originPoint, originX, originY };
+            if (this.options.onCropStart !== null) {
+              this.options.onCropStart(this.getValue());
+            }
+          }
+        }, {
+          key: "onHandleMoveMoving",
+          value: function onHandleMoveMoving(e) {
+            var _e$detail = e.detail, mouseX = _e$detail.mouseX, mouseY = _e$detail.mouseY;
+            var container = this.cropperEl.getBoundingClientRect();
+            mouseX = mouseX - container.left;
+            mouseY = mouseY - container.top;
+            if (mouseX < 0) {
+              mouseX = 0;
+            } else if (mouseX > container.width) {
+              mouseX = container.width;
+            }
+            if (mouseY < 0) {
+              mouseY = 0;
+            } else if (mouseY > container.height) {
+              mouseY = container.height;
+            }
+            var origin = this.activeHandle.originPoint.slice();
+            var originX = this.activeHandle.originX;
+            var originY = this.activeHandle.originY;
+            var handle = this.activeHandle.handle;
+            var TOP_MOVABLE = handle.constraints[0] === 1;
+            var RIGHT_MOVABLE = handle.constraints[1] === 1;
+            var BOTTOM_MOVABLE = handle.constraints[2] === 1;
+            var LEFT_MOVABLE = handle.constraints[3] === 1;
+            var MULTI_AXIS = (LEFT_MOVABLE || RIGHT_MOVABLE) && (TOP_MOVABLE || BOTTOM_MOVABLE);
+            var x1 = LEFT_MOVABLE || RIGHT_MOVABLE ? originX : this.box.x1;
+            var x2 = LEFT_MOVABLE || RIGHT_MOVABLE ? originX : this.box.x2;
+            var y1 = TOP_MOVABLE || BOTTOM_MOVABLE ? originY : this.box.y1;
+            var y2 = TOP_MOVABLE || BOTTOM_MOVABLE ? originY : this.box.y2;
+            x1 = LEFT_MOVABLE ? mouseX : x1;
+            x2 = RIGHT_MOVABLE ? mouseX : x2;
+            y1 = TOP_MOVABLE ? mouseY : y1;
+            y2 = BOTTOM_MOVABLE ? mouseY : y2;
+            var isFlippedX = false, isFlippedY = false;
+            if (LEFT_MOVABLE || RIGHT_MOVABLE) {
+              isFlippedX = LEFT_MOVABLE ? mouseX > originX : mouseX < originX;
+            }
+            if (TOP_MOVABLE || BOTTOM_MOVABLE) {
+              isFlippedY = TOP_MOVABLE ? mouseY > originY : mouseY < originY;
+            }
+            if (isFlippedX) {
+              var tmp = x1;
+              x1 = x2;
+              x2 = tmp;
+              origin[0] = 1 - origin[0];
+            }
+            if (isFlippedY) {
+              var _tmp = y1;
+              y1 = y2;
+              y2 = _tmp;
+              origin[1] = 1 - origin[1];
+            }
+            var box = new Box(x1, y1, x2, y2);
+            if (this.options.aspectRatio) {
+              var ratio = this.options.aspectRatio;
+              var isVerticalMovement = false;
+              if (MULTI_AXIS) {
+                isVerticalMovement = mouseY > box.y1 + ratio * box.width() || mouseY < box.y2 - ratio * box.width();
+              } else if (TOP_MOVABLE || BOTTOM_MOVABLE) {
+                isVerticalMovement = true;
+              }
+              var ratioMode = isVerticalMovement ? "width" : "height";
+              box.constrainToRatio(ratio, origin, ratioMode);
+            }
+            var parentWidth = this.cropperEl.offsetWidth;
+            var parentHeight = this.cropperEl.offsetHeight;
+            box.constrainToBoundary(parentWidth, parentHeight, origin);
+            var min = this.options.minSize;
+            var max = this.options.maxSize;
+            box.constrainToSize(max.width, max.height, min.width, min.height, origin, this.options.aspectRatio);
+            if (box.x1 < 0 || box.y1 < 0 || box.x2 > Math.ceil(container.width) || box.y2 > Math.ceil(container.height)) {
+              return;
+            }
+            this.box = box;
+            this.redraw();
+            if (this.options.onCropMove !== null) {
+              this.options.onCropMove(this.getValue());
+            }
+          }
+        }, {
+          key: "onHandleMoveEnd",
+          value: function onHandleMoveEnd(e) {
+            if (this.options.onCropEnd !== null) {
+              this.options.onCropEnd(this.getValue());
+            }
+          }
+        }, {
+          key: "onRegionMoveStart",
+          value: function onRegionMoveStart(e) {
+            var _e$detail2 = e.detail, mouseX = _e$detail2.mouseX, mouseY = _e$detail2.mouseY;
+            var container = this.cropperEl.getBoundingClientRect();
+            mouseX = mouseX - container.left;
+            mouseY = mouseY - container.top;
+            this.currentMove = {
+              offsetX: mouseX - this.box.x1,
+              offsetY: mouseY - this.box.y1
+            };
+            if (this.options.onCropStart !== null) {
+              this.options.onCropStart(this.getValue());
+            }
+          }
+        }, {
+          key: "onRegionMoveMoving",
+          value: function onRegionMoveMoving(e) {
+            var _e$detail3 = e.detail, mouseX = _e$detail3.mouseX, mouseY = _e$detail3.mouseY;
+            var _currentMove = this.currentMove, offsetX = _currentMove.offsetX, offsetY = _currentMove.offsetY;
+            var container = this.cropperEl.getBoundingClientRect();
+            mouseX = mouseX - container.left;
+            mouseY = mouseY - container.top;
+            this.box.move(mouseX - offsetX, mouseY - offsetY);
+            if (this.box.x1 < 0) {
+              this.box.move(0, null);
+            }
+            if (this.box.x2 > container.width) {
+              this.box.move(container.width - this.box.width(), null);
+            }
+            if (this.box.y1 < 0) {
+              this.box.move(null, 0);
+            }
+            if (this.box.y2 > container.height) {
+              this.box.move(null, container.height - this.box.height());
+            }
+            this.redraw();
+            if (this.options.onCropMove !== null) {
+              this.options.onCropMove(this.getValue());
+            }
+          }
+        }, {
+          key: "onRegionMoveEnd",
+          value: function onRegionMoveEnd(e) {
+            if (this.options.onCropEnd !== null) {
+              this.options.onCropEnd(this.getValue());
+            }
+          }
+        }, {
+          key: "getValue",
+          value: function getValue() {
+            var mode = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : null;
+            if (mode === null) {
+              mode = this.options.returnMode;
+            }
+            if (mode == "real") {
+              var actualWidth = this.imageEl.naturalWidth;
+              var actualHeight = this.imageEl.naturalHeight;
+              var _imageEl$getBoundingC = this.imageEl.getBoundingClientRect(), elementWidth = _imageEl$getBoundingC.width, elementHeight = _imageEl$getBoundingC.height;
+              var factorX = actualWidth / elementWidth;
+              var factorY = actualHeight / elementHeight;
+              return {
+                x: Math.round(this.box.x1 * factorX),
+                y: Math.round(this.box.y1 * factorY),
+                width: Math.round(this.box.width() * factorX),
+                height: Math.round(this.box.height() * factorY)
+              };
+            } else if (mode == "ratio") {
+              var _imageEl$getBoundingC2 = this.imageEl.getBoundingClientRect(), _elementWidth = _imageEl$getBoundingC2.width, _elementHeight = _imageEl$getBoundingC2.height;
+              return {
+                x: round(this.box.x1 / _elementWidth, 3),
+                y: round(this.box.y1 / _elementHeight, 3),
+                width: round(this.box.width() / _elementWidth, 3),
+                height: round(this.box.height() / _elementHeight, 3)
+              };
+            } else if (mode == "raw") {
+              return {
+                x: Math.round(this.box.x1),
+                y: Math.round(this.box.y1),
+                width: Math.round(this.box.width()),
+                height: Math.round(this.box.height())
+              };
+            }
+          }
+        }], [{
+          key: "parseOptions",
+          value: function parseOptions(opts) {
+            var defaults$$1 = {
+              aspectRatio: null,
+              maxSize: { width: null, height: null },
+              minSize: { width: null, height: null },
+              startSize: { width: 100, height: 100, unit: "%" },
+              returnMode: "real",
+              onInitialize: null,
+              onCropStart: null,
+              onCropMove: null,
+              onCropEnd: null
+            };
+            var aspectRatio = null;
+            if (opts.aspectRatio !== void 0) {
+              if (typeof opts.aspectRatio === "number") {
+                aspectRatio = opts.aspectRatio;
+              } else if (opts.aspectRatio instanceof Array) {
+                aspectRatio = opts.aspectRatio[1] / opts.aspectRatio[0];
+              }
+            }
+            var maxSize = null;
+            if (opts.maxSize !== void 0 && opts.maxSize !== null) {
+              maxSize = {
+                width: opts.maxSize[0] || null,
+                height: opts.maxSize[1] || null,
+                unit: opts.maxSize[2] || "px"
+              };
+            }
+            var minSize = null;
+            if (opts.minSize !== void 0 && opts.minSize !== null) {
+              minSize = {
+                width: opts.minSize[0] || null,
+                height: opts.minSize[1] || null,
+                unit: opts.minSize[2] || "px"
+              };
+            }
+            var startSize = null;
+            if (opts.startSize !== void 0 && opts.startSize !== null) {
+              startSize = {
+                width: opts.startSize[0] || null,
+                height: opts.startSize[1] || null,
+                unit: opts.startSize[2] || "%"
+              };
+            }
+            var onInitialize = null;
+            if (typeof opts.onInitialize === "function") {
+              onInitialize = opts.onInitialize;
+            }
+            var onCropStart = null;
+            if (typeof opts.onCropStart === "function") {
+              onCropStart = opts.onCropStart;
+            }
+            var onCropEnd = null;
+            if (typeof opts.onCropEnd === "function") {
+              onCropEnd = opts.onCropEnd;
+            }
+            var onCropMove = null;
+            if (typeof opts.onUpdate === "function") {
+              console.warn("Croppr.js: `onUpdate` is deprecated and will be removed in the next major release. Please use `onCropMove` or `onCropEnd` instead.");
+              onCropMove = opts.onUpdate;
+            }
+            if (typeof opts.onCropMove === "function") {
+              onCropMove = opts.onCropMove;
+            }
+            var returnMode = null;
+            if (opts.returnMode !== void 0) {
+              var s = opts.returnMode.toLowerCase();
+              if (["real", "ratio", "raw"].indexOf(s) === -1) {
+                throw "Invalid return mode.";
+              }
+              returnMode = s;
+            }
+            var convertToPixels = function convertToPixels2(container) {
+              var width = container.offsetWidth;
+              var height = container.offsetHeight;
+              var sizeKeys = ["maxSize", "minSize", "startSize"];
+              for (var i = 0; i < sizeKeys.length; i++) {
+                var key = sizeKeys[i];
+                if (this[key] !== null) {
+                  if (this[key].unit == "%") {
+                    if (this[key].width !== null) {
+                      this[key].width = this[key].width / 100 * width;
+                    }
+                    if (this[key].height !== null) {
+                      this[key].height = this[key].height / 100 * height;
+                    }
+                  }
+                  delete this[key].unit;
+                }
+              }
+            };
+            var defaultValue = function defaultValue2(v, d) {
+              return v !== null ? v : d;
+            };
+            return {
+              aspectRatio: defaultValue(aspectRatio, defaults$$1.aspectRatio),
+              maxSize: defaultValue(maxSize, defaults$$1.maxSize),
+              minSize: defaultValue(minSize, defaults$$1.minSize),
+              startSize: defaultValue(startSize, defaults$$1.startSize),
+              returnMode: defaultValue(returnMode, defaults$$1.returnMode),
+              onInitialize: defaultValue(onInitialize, defaults$$1.onInitialize),
+              onCropStart: defaultValue(onCropStart, defaults$$1.onCropStart),
+              onCropMove: defaultValue(onCropMove, defaults$$1.onCropMove),
+              onCropEnd: defaultValue(onCropEnd, defaults$$1.onCropEnd),
+              convertToPixels
+            };
+          }
+        }]);
+        return CropprCore2;
+      }();
+      function round(value, decimals) {
+        return Number(Math.round(value + "e" + decimals) + "e-" + decimals);
+      }
+      var Croppr$12 = function(_CropprCore) {
+        inherits(Croppr2, _CropprCore);
+        function Croppr2(element, options) {
+          var _deferred = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : false;
+          classCallCheck(this, Croppr2);
+          return possibleConstructorReturn(this, (Croppr2.__proto__ || Object.getPrototypeOf(Croppr2)).call(this, element, options, _deferred));
+        }
+        createClass(Croppr2, [{
+          key: "getValue",
+          value: function getValue(mode) {
+            return get(Croppr2.prototype.__proto__ || Object.getPrototypeOf(Croppr2.prototype), "getValue", this).call(this, mode);
+          }
+        }, {
+          key: "setImage",
+          value: function setImage(src) {
+            return get(Croppr2.prototype.__proto__ || Object.getPrototypeOf(Croppr2.prototype), "setImage", this).call(this, src);
+          }
+        }, {
+          key: "destroy",
+          value: function destroy() {
+            return get(Croppr2.prototype.__proto__ || Object.getPrototypeOf(Croppr2.prototype), "destroy", this).call(this);
+          }
+        }, {
+          key: "moveTo",
+          value: function moveTo(x, y) {
+            this.box.move(x, y);
+            this.redraw();
+            if (this.options.onCropEnd !== null) {
+              this.options.onCropEnd(this.getValue());
+            }
+            return this;
+          }
+        }, {
+          key: "resizeTo",
+          value: function resizeTo(width, height) {
+            var origin = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : [0.5, 0.5];
+            this.box.resize(width, height, origin);
+            this.redraw();
+            if (this.options.onCropEnd !== null) {
+              this.options.onCropEnd(this.getValue());
+            }
+            return this;
+          }
+        }, {
+          key: "scaleBy",
+          value: function scaleBy(factor) {
+            var origin = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : [0.5, 0.5];
+            this.box.scale(factor, origin);
+            this.redraw();
+            if (this.options.onCropEnd !== null) {
+              this.options.onCropEnd(this.getValue());
+            }
+            return this;
+          }
+        }, {
+          key: "reset",
+          value: function reset() {
+            this.box = this.initializeBox(this.options);
+            this.redraw();
+            if (this.options.onCropEnd !== null) {
+              this.options.onCropEnd(this.getValue());
+            }
+            return this;
+          }
+        }]);
+        return Croppr2;
+      }(CropprCore);
+      return Croppr$12;
+    });
+  })(croppr);
+  var Croppr$1 = croppr.exports;
+  function aspectRatioFit({ srcWidth, srcHeight, maxWidth, maxHeight }) {
+    let ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
+    return {
+      width: srcWidth * ratio,
+      height: srcHeight * ratio
+    };
+  }
+  class Croppr {
+    constructor({ el, original_dimensions, saved, clip, events }) {
+      this.el = el;
+      this.original_dimensions = original_dimensions;
+      this.saved = saved;
+      this.min_width = clip ? clip.minwidth : null;
+      this.min_height = clip ? clip.minheight : null;
+      this.max_width = clip ? clip.maxwidth : null;
+      this.max_height = clip ? clip.maxheight : null;
+      this.limit_width = null;
+      this.limit_height = null;
+      this.ratio = clip ? clip.ratio : null;
+      this.events = events;
+      this.validate();
+      this.cropInstance = this.init();
+    }
+    reset({ position, clip }) {
+      this.cropInstance.destroy();
+      this.saved = position;
+      this.cropInstance = this.init();
+    }
+    setRatio({ clip }) {
+      this.cropInstance.destroy();
+      this.min_width = clip ? clip.minwidth : null;
+      this.min_height = clip ? clip.minheight : null;
+      this.ratio = clip ? clip.ratio : null;
+      this.saved = false;
+      this.cropInstance = this.init();
+    }
+    init() {
+      let options = __spreadValues({
+        returnMode: "raw",
+        onInitialize: (instance) => {
+          let image = document.getElementsByClassName("croppr-image")[0];
+          image.addEventListener("load", (event) => {
+            this.image = event.target;
+            this.factor_w = this.original_dimensions.width / event.target.clientWidth;
+            this.factor_h = this.original_dimensions.height / event.target.clientHeight;
+            this.setStartPosition();
+          }, false);
+        }
+      }, this.events);
+      if (this.min_width && this.min_height) {
+        options.aspectRatio = this.ratio === "fixed" ? this.min_height / this.min_width : null;
+        options.minSize = [this.min_width, this.min_height, "px"];
+        this.limit_width = this.min_width;
+        this.limit_height = this.min_height;
+      }
+      if (this.max_width && this.max_height) {
+        options.aspectRatio = this.ratio === "fixed" ? this.max_height / this.max_width : null;
+        options.maxSize = [this.max_width, this.max_height, "px"];
+        this.limit_width = this.max_width;
+        this.limit_height = this.max_height;
+      }
+      return new Croppr$1(this.el, options);
+    }
+    getCropArea() {
+      let coord = this.cropInstance.getValue();
+      let area = {
+        width: this.roundSize(coord.width * this.factor_w, this.limit_width),
+        height: this.roundSize(coord.height * this.factor_h, this.limit_height)
+      };
+      area.left = this.adjustPosition(coord.x * this.factor_w, area.width, this.original_dimensions.width);
+      area.top = this.adjustPosition(coord.y * this.factor_h, area.height, this.original_dimensions.height);
+      return area;
+    }
+    setStartPosition() {
+      let reference = {
+        width: 10,
+        height: 10
+      };
+      if (this.max_width && this.max_height) {
+        this.cropInstance.options.maxSize = reference = {
+          width: this.max_width / this.factor_w,
+          height: this.max_height / this.factor_h
+        };
+      }
+      if (this.min_width && this.min_height) {
+        this.cropInstance.options.minSize = reference = {
+          width: this.min_width / this.factor_w,
+          height: this.min_height / this.factor_h
+        };
+      }
+      if (!this.saved) {
+        let size = aspectRatioFit({
+          srcWidth: reference.width,
+          srcHeight: reference.height,
+          maxWidth: this.original_dimensions.width,
+          maxHeight: this.original_dimensions.height
+        });
+        reference = {
+          width: size.width / this.factor_w,
+          height: size.height / this.factor_h
+        };
+        this.cropInstance.resizeTo(reference.width, reference.height);
+        this.cropInstance.moveTo(0, 0);
+      } else {
+        let calculated = {
+          width: Math.round(this.saved.width / this.factor_w),
+          height: Math.round(this.saved.height / this.factor_h),
+          left: Math.round(this.saved.left / this.factor_w),
+          top: Math.round(this.saved.top / this.factor_h)
+        };
+        this.cropInstance.resizeTo(calculated.width, calculated.height);
+        this.cropInstance.moveTo(calculated.left, calculated.top);
+      }
+    }
+    validate() {
+      if (this.min_width && this.original_dimensions.width < this.min_width) {
+        throw new Error(`Image width (${this.original_dimensions.width}px) must be at least ${this.min_width}px`);
+      }
+      if (this.min_height && this.original_dimensions.height < this.min_height) {
+        throw new Error(`Image height (${this.original_dimensions.height}px) must be at least ${this.min_height}px`);
+      }
+      if (this.min_width && this.min_height && this.max_width && this.max_height && this.ratio === "fixed" && this.min_width / this.min_height !== this.max_width / this.max_height) {
+        throw new Error(`Ratio must be same for min and max`);
+      }
+    }
+    roundSize(value, limit = null) {
+      return limit && limit - value >= -1 && limit - value <= 1 ? limit : Math.round(value);
+    }
+    adjustPosition(position, size, limit) {
+      return position + size > limit ? limit - size : Math.round(position);
+    }
+  }
+  function debounce(func, wait = 100) {
+    let timeout;
+    return function(...args) {
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        func.apply(this, args);
+      }, wait);
+    };
+  }
+  var render$1 = function() {
+    var _vm = this;
+    var _h = _vm.$createElement;
+    var _c = _vm._self._c || _h;
+    return _c("k-overlay", { ref: "overlay", attrs: { "autofocus": _vm.autofocus, "centered": true }, on: { "ready": function($event) {
+      return _vm.$emit("ready");
+    } } }, [_c("div", { ref: "dialog", staticClass: "k-dialog", class: _vm.$vnode.data.staticClass, style: _vm.dialog_width, attrs: { "data-size": _vm.size }, on: { "mousedown": function($event) {
+      $event.stopPropagation();
+    } } }, [_vm.notification ? _c("div", { staticClass: "k-dialog-notification", attrs: { "data-theme": _vm.notification.type } }, [_c("p", [_vm._v(_vm._s(_vm.notification.message))]), _c("k-button", { attrs: { "icon": "cancel" }, on: { "click": function($event) {
+      _vm.notification = null;
+    } } })], 1) : _vm._e(), _vm.image ? _c("div", { staticClass: "k-dialog-body" }, [_vm.spinner ? _c("div", { staticClass: "preload" }, [_c("div", { staticClass: "spinner" }, [_c("div", { staticClass: "bounce1" }), _c("div", { staticClass: "bounce2" }), _c("div", { staticClass: "bounce3" })]), _c("footer", { staticClass: "preload-dialog-footer" }, [_vm._t("footer", function() {
+      return [_c("k-button-group", [_c("k-button", { staticClass: "k-dialog-button-cancel", attrs: { "icon": "cancel" }, on: { "click": _vm.cancel } }, [_vm._v(" " + _vm._s(_vm.$t("cancel")) + " ")])], 1)];
+    })], 2)]) : _vm._e(), _c("img", { attrs: { "src": _vm.image.url, "id": "croppr" } })]) : _vm._e(), _c("footer", { staticClass: "k-dialog-footer" }, [_vm._t("footer", function() {
+      return [_c("div", { staticClass: "ratio", staticStyle: { "margin-left": "1rem", "margin-right": "1rem" } }, [_c("k-select-field", { attrs: { "options": _vm.ratios, "required": false, "label": "Ratio", "name": "ratio", "help": "" }, on: { "input": _vm.setRatio }, model: { value: _vm.ratio, callback: function($$v) {
+        _vm.ratio = $$v;
+      }, expression: "ratio" } })], 1), _c("k-button-group", [_c("k-button", { staticClass: "k-dialog-button-cancel", attrs: { "icon": "cancel" }, on: { "click": _vm.cancel } }, [_vm._v(" " + _vm._s(_vm.$t("cancel")) + " ")]), _c("k-button", { staticClass: "k-dialog-button-submit", attrs: { "icon": _vm.icon, "theme": _vm.theme }, on: { "click": _vm.submit } }, [_vm._v(" " + _vm._s(_vm.button || _vm.$t("confirm")) + " ")])], 1)];
+    })], 2)])]);
+  };
+  var staticRenderFns$1 = [];
+  render$1._withStripped = true;
+  var clipDialog_vue_vue_type_style_index_0_lang = "";
+  const script$1 = {
+    extends: "k-dialog",
+    props: {
+      image: {
+        type: Object,
+        default: null
+      },
+      clip: {
+        type: Object,
+        default: null
+      },
+      ratios: {
+        type: Array,
+        default: [{ value: "free", text: "Free" }]
+      }
+    },
+    data() {
+      return {
+        cropprFacade: null,
+        dialog_width: null,
+        spinner: true,
+        freezeDialog: false,
+        was_moved: false,
+        ratio: "free"
+      };
+    },
+    created() {
+      this.$on("ready", this.isOpen, false);
+      this.$on("close", this.isClosed, false);
+    },
+    destroyed() {
+      this.$off("ready", this.isOpen, false);
+      this.$off("close", this.isClosed, false);
+    },
+    methods: {
+      getRatioX() {
+        return parseInt(this.ratio.split("/")[0]);
+      },
+      getRatioY() {
+        return parseInt(this.ratio.split("/")[1]);
+      },
+      setRatio() {
+        if (this.ratio == "free") {
+          this.clip = {
+            minwidth: 1,
+            minheight: 3,
+            ratio: null
+          };
+        } else {
+          this.clip = {
+            minwidth: this.getRatioX(),
+            minheight: this.getRatioY(),
+            ratio: "fixed"
+          };
+        }
+        this.was_moved = true;
+        this.cropprFacade.setRatio({
+          clip: this.clip
+        });
+      },
+      initCropper() {
+        let el = document.getElementById("croppr");
+        el.addEventListener("load", this.hideSpinner, false);
+        if (el.complete) {
+          this.hideSpinner();
+        }
+        try {
+          this.cropprFacade = new Croppr({
+            el,
+            original_dimensions: this.image.dimensions,
+            clip: this.clip,
+            saved: this.image.clip,
+            events: {
+              onCropStart: () => {
+                this.freezeDialog = true;
+                this.was_moved = true;
+              },
+              onCropEnd: () => {
+                setTimeout(() => {
+                  this.freezeDialog = false;
+                }, 200);
+              }
+            }
+          });
+          window.addEventListener("resize", this.showSpinner, false);
+          window.addEventListener("resize", this.resizeDialog, false);
+        } catch (error) {
+          this.cancel();
+          console.error(this.image.id + ": " + error.message);
+          this.$store.dispatch("notification/error", error.message);
+        }
+      },
+      isOpen() {
+        this.setDialogWidth();
+        this.showSpinner();
+        this.$nextTick(() => {
+          this.initCropper();
+        });
+      },
+      isClosed() {
+        window.removeEventListener("resize", this.showSpinner, false);
+        window.removeEventListener("resize", this.resizeDialog, false);
+      },
+      cancel() {
+        if (this.freezeDialog)
+          return;
+        this.$emit("cancel");
+        this.close();
+      },
+      remToPx(px = 1) {
+        return px * parseInt(getComputedStyle(document.documentElement).fontSize);
+      },
+      submit() {
+        if (this.was_moved) {
+          this.$emit("submit", {
+            id: this.image.id,
+            clip: this.cropprFacade.getCropArea(),
+            ratio: this.ratio
+          });
+          this.was_moved = false;
+        }
+        this.close();
+      },
+      setDialogWidth() {
+        let max_width = window.innerWidth - this.remToPx(6);
+        let max_height = window.innerHeight - this.remToPx(12);
+        let size = aspectRatioFit({
+          srcWidth: this.image.dimensions.width,
+          srcHeight: this.image.dimensions.height,
+          maxWidth: max_width,
+          maxHeight: max_height
+        });
+        let width = this.image.dimensions.width;
+        if (this.image.dimensions.width > max_width || this.image.dimensions.height > max_height) {
+          width = size.width;
+        }
+        this.dialog_width = "width: " + width + "px;";
+      },
+      resizeDialog: debounce(function() {
+        this.setDialogWidth();
+        let last_known = this.cropprFacade.getCropArea();
+        this.cropprFacade.reset({
+          position: last_known,
+          clip: this.clip,
+          ratio: this.ratio
+        });
+        this.spinner = false;
+      }, 500),
+      hideSpinner: function() {
+        this.spinner = false;
+      },
+      showSpinner: function() {
+        if (this.spinner === false) {
+          this.spinner = true;
+        }
+      }
+    }
+  };
+  const __cssModules$1 = {};
+  var __component__$1 = /* @__PURE__ */ normalizeComponent(script$1, render$1, staticRenderFns$1, false, injectStyles$1, null, null, null);
+  function injectStyles$1(context) {
+    for (let o in __cssModules$1) {
+      this[o] = __cssModules$1[o];
+    }
+  }
+  __component__$1.options.__file = "src/components/clipDialog.vue";
+  var clipDialog = /* @__PURE__ */ function() {
+    return __component__$1.exports;
+  }();
+  var structurePreview_vue_vue_type_style_index_0_scoped_true_lang = "";
+  const script = {
+    extends: "k-files-field-preview"
+  };
+  let render, staticRenderFns;
+  const __cssModules = {};
+  var __component__ = /* @__PURE__ */ normalizeComponent(script, render, staticRenderFns, false, injectStyles, "00f58f36", null, null);
+  function injectStyles(context) {
+    for (let o in __cssModules) {
+      this[o] = __cssModules[o];
+    }
+  }
+  __component__.options.__file = "src/components/structurePreview.vue";
+  var structurePreview = /* @__PURE__ */ function() {
+    return __component__.exports;
+  }();
+  panel.plugin("mullema/image-clip", {
+    fields: {
+      "image-clip": imageClip
+    },
+    components: {
+      "k-clip-items": clipItems,
+      "k-clip-item": clipItem,
+      "k-clip-item-image": clipItemImage,
+      "k-clip-handle": clipHandle,
+      "k-clip-dialog": clipDialog,
+      "k-image-clip-field-preview": structurePreview
+    }
+  });
+})();

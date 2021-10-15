@@ -10,6 +10,25 @@ return array_replace_recursive($base, [
     'props' => [
         'clip' => function ($clip = []) {
             return Data::decode($clip, 'yaml');
+        },
+        'ratios' => function($ratios = []) {
+            // get ratios from blueprint
+            $ratios = Data::decode($ratios, 'yaml');
+            // convert ratios for select field
+            $ratioObjects = [];
+            // add free ratio by default
+            $free = new stdClass();
+            $free->value = 'free';
+            $free->text = 'Free';
+            array_push($ratioObjects, $free);
+            // add ratios from blueprint
+            foreach ($ratios as $ratio) {
+                $obj = new stdClass();
+                $obj->value = $ratio;
+                $obj->text = $ratio;
+                array_push($ratioObjects, $obj);
+            };
+            return $ratioObjects;
         }
     ],
     'methods' => [
