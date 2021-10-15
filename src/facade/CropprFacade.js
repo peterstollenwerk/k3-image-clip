@@ -36,12 +36,23 @@ export default class {
      * reset all of the croppr instance and adjust to new environment
      * @param {Object} position - last known position of crop area
      */
-    reset({position}) {
+    reset({position, clip}) {
         this.cropInstance.destroy();
         this.saved = position;
         this.cropInstance = this.init();
     }
-
+    /**
+     * 
+     * @param {Object} clip
+     */
+    setRatio({clip}) {
+        this.cropInstance.destroy();
+        this.min_width = clip ? clip.minwidth : null;
+        this.min_height = clip ? clip.minheight : null;
+        this.ratio = clip ? clip.ratio : null;
+        this.saved = false;
+        this.cropInstance = this.init();
+    }
     /**
      * Initiate Croppr
      * @returns {Croppr} - Croppr Instance

@@ -43,10 +43,27 @@
 
       <footer class="k-dialog-footer">
         <slot name="footer">
+            <div class="ratio" style="margin-left: 1rem; margin-right: 1rem;">
+            <k-select-field
+                  v-model="ratio"
+                  :options="[
+                    { value: 'free', text: 'Free' },
+                    { value: '1/1', text: '1/1' },
+                    { value: '2/1', text: '2/1' }
+                  ]"
+                  :required="false"
+                  label="Ratio"
+                  name="ratio"
+                  help=""
+                  @input="setRatio"
+              />
+            </div>
           <k-button-group>
             <k-button icon="cancel" class="k-dialog-button-cancel" @click="cancel">
               {{ $t('cancel') }}
             </k-button>
+            
+  
             <k-button
                 :icon="icon"
                 :theme="theme"
@@ -86,7 +103,8 @@ export default {
       dialog_width: null,
       spinner: true,
       freezeDialog: false,
-      was_moved: false
+      was_moved: false,
+      ratio: 'free'
     }
   },
   created () {
@@ -98,13 +116,33 @@ export default {
     this.$off('close', this.isClosed, false)
   },
   methods: {
-    isOpen () {
-      this.setDialogWidth()
-      this.showSpinner()
-      // dialog opened
-      this.$nextTick(() => {
-        let el = document.getElementById('croppr')
+    getRatioX() {
+      return parseInt(this.ratio.split('/')[0])
+    },
+    getRatioY() {
+      return parseInt(this.ratio.split('/')[1])
+    },
+    setRatio() {
 
+      if(this.ratio=='free') {
+        this.clip = {
+          minwidth: null,
+          minheight: null,
+          ratio: null
+        }  
+      } else {
+        this.clip = {
+          minwidth: this.getRatioX(),
+          minheight:this.getRatioY(),
+          ratio: 'fixed'
+        }
+      }
+      this.cropprFacade.setRatio({ 
+        clip: this.clip
+      })
+    },
+    initCropper() {
+        let el = document.getElementById('croppr')
         el.addEventListener('load', this.hideSpinner, false)
         if (el.complete) { // if already in cache
           this.hideSpinner()
@@ -138,6 +176,13 @@ export default {
           console.error(this.image.id + ': ' + error.message)
           this.$store.dispatch('notification/error', error.message)
         }
+    },
+    isOpen () {
+      this.setDialogWidth()
+      this.showSpinner()
+      // dialog opened
+      this.$nextTick(() => {
+        this.initCropper()
       })
     },
     isClosed () {
@@ -157,7 +202,8 @@ export default {
       if (this.was_moved) {
         this.$emit('submit', {
           id: this.image.id,
-          clip: this.cropprFacade.getCropArea()
+          clip: this.cropprFacade.getCropArea(),
+          ratio: this.ratio
         })
         this.was_moved = false
       }
@@ -184,7 +230,11 @@ export default {
     resizeDialog: debounce(function () {
       this.setDialogWidth()
       let last_known = this.cropprFacade.getCropArea()
-      this.cropprFacade.reset({ position: last_known })
+      this.cropprFacade.reset({ 
+        position: last_known,
+        clip: this.clip,
+        ratio: this.ratio
+      })
       this.spinner = false
     }, 500),
     hideSpinner: function () {

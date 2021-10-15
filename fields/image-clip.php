@@ -180,7 +180,7 @@ return array_replace_recursive($base, [
             if (isset($item['clip'])) {
                 $result[] = [
                     'id' => $item['id'],
-                    'clip' => $item['clip']
+                    'clip' => $item['clip'],
                 ];
             } else {
                 $result[] = [
